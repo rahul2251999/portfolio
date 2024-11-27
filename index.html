@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rahul Podugu - Portfolio</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="container">
+      <div class="nav-left">
+        <span class="typed-text" id="typed-text"></span><span class="cursor" id="cursor"></span>
+      </div>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#publications">Publications</a>
+        <a href="cv.pdf" target="_blank" class="btn">
+          <i class="fas fa-file-alt"></i> Resume
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1 class="big-name">
+        <span class="pink-name">Rahul</span><span class="blue-name">Podugu</span>
+      </h1>
+      <p>
+        I specialize in designing scalable, secure, and efficient systems for modern web applications.
+      </p>
+      <div class="hero-icons">
+        <a href="https://github.com/rahul2251999" target="_blank" class="social-icon">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="mailto:rahulpodugu2@gmail.com" target="_blank" class="social-icon">
+          <i class="fas fa-envelope"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/rahulpodugu" target="_blank" class="social-icon">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://leetcode.com/u/rahulpodugu2/" target="_blank" class="social-icon">
+          <i class="fas fa-code"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <div class="container">
+      <h2>About Me</h2>
+      <p>
+        I am a results-driven software engineer with expertise in scalable distributed systems, secure application development, 
+        and cloud-native solutions. Over the past 2+ years, I’ve successfully delivered projects in e-commerce, data analytics, 
+        and secure file sharing. My goal is to build robust and efficient systems that solve real-world problems while leveraging innovative technologies.
+      </p>
+    </div>
+  </section>
+
+  <!-- Education Section -->
+  <section id="timeline" class="timeline">
+    <div class="container">
+      <h2>Education & Experience</h2>
+      <div class="timeline-wrapper">
+        <!-- Education -->
+        <div class="timeline-left">
+          <div class="timeline-item">
+            <h3>Master of Science in Computer Science</h3>
+            <p class="institution">University of Maryland, Baltimore County</p>
+            <p class="date">Aug 2022 - May 2024</p>
+          </div>
+          <div class="timeline-item">
+            <h3>Bachelor of Engineering in Computer Science</h3>
+            <p class="institution">Amrita Vishwa Vidyapeetham University</p>
+            <p class="date">Jul 2017 - Jul 2021</p>
+          </div>
+        </div>
+  
+        <!-- Vertical Line -->
+        <div class="timeline-line"></div>
+  
+        <!-- Job Experience -->
+        <div class="timeline-right">
+          <div class="timeline-item">
+            <h3>Graduate Fellow</h3>
+            <p class="company">BwTech@UMBC</p>
+            <p class="date">Aug 2022 - May 2023</p>
+            <ul>
+              <li>Developed a user-friendly educational platform using Angular and Spring Boot.</li>
+              <li>Enhanced backend data pipelines, improving response times by 30%.</li>
+              <li>Presented "Virtual Apprentice" at TEDx, showcasing its impact on virtual learning.</li>
+            </ul>
+          </div>
+          <div class="timeline-item">
+            <h3>Software Developer</h3>
+            <p class="company">UST</p>
+            <p class="date">Sept 2021 - Jun 2022</p>
+            <ul>
+              <li>Built a microservices architecture for an e-commerce platform handling 40K+ daily users.</li>
+              <li>Integrated Kafka for real-time messaging, improving reliability by 25%.</li>
+              <li>Reduced deployment times by 30% using CI/CD pipelines with Docker and Jenkins.</li>
+            </ul>
+          </div>
+          <div class="timeline-item">
+            <h3>Analyst Intern</h3>
+            <p class="company">Fidelity National Financial</p>
+            <p class="date">Apr 2021 - Aug 2021</p>
+            <ul>
+              <li>Optimized cloud migration strategies, reducing latency by 25% with enhanced SQL queries.</li>
+              <li>Deployed Kubernetes-managed microservices, improving system scalability and uptime.</li>
+              <li>Developed a data validation tool, reducing error rates by 30% in financial transaction systems.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- Projects Section -->
+  <section id="projects" class="projects">
+    <div class="container">
+      <h2>Projects</h2>
+      <div class="project-grid">
+        <div class="project-card">
+          <h3>Microservices for E-Commerce</h3>
+          <p>
+            Built a fault-tolerant microservices-based system using Spring Boot, Docker, and Kafka. 
+            The platform handled user and order management, supporting 10,000+ concurrent requests with 99.99% uptime.
+          </p>
+        </div>
+        <div class="project-card">
+          <h3>Peer-to-Peer File System</h3>
+          <p>
+            Designed a secure file-sharing platform using RSA encryption and Linux deployment, 
+            achieving 3x faster file transfer rates compared to traditional solutions.
+          </p>
+        </div>
+        <div class="project-card">
+          <h3>Data Analyzer for Twitter Bots</h3>
+          <p>
+            Scraped and analyzed 3,000+ tweets, classifying data into domains using Python. 
+            Visualized insights with geo-maps and spam score meters for strategic decision-making.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="skills">
+    <div class="container">
+      <h2>Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-item">
+          <h4>Languages</h4>
+          <p>Java, Python, C++, JavaScript, SQL</p>
+        </div>
+        <div class="skill-item">
+          <h4>Web Development</h4>
+          <p>Angular, React, Spring Boot, Node.js</p>
+        </div>
+        <div class="skill-item">
+          <h4>Cloud Platforms</h4>
+          <p>AWS, Azure, Google Cloud</p>
+        </div>
+        <div class="skill-item">
+          <h4>Tools</h4>
+          <p>Docker, Kubernetes, Jenkins, Selenium</p>
+        </div>
+        <div class="skill-item">
+          <h4>Databases</h4>
+          <p>PostgreSQL, MySQL, MongoDB</p>
+        </div>
+        <div class="skill-item">
+          <h4>Additional Skills</h4>
+          <p>CI/CD Pipelines, REST APIs, Message Queuing (Kafka)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Publications Section -->
+  <section id="publications" class="publications">
+    <div class="container">
+      <h2>Publications</h2>
+      <div class="publication-item">
+        <h3>Remote Medical Assistance for Marine Fishermen through OceanNet</h3>
+        <p>
+          Presented at the <strong>2021 12th International Conference on Computing Communication and Networking Technologies (ICCCNT)</strong>, Kharagpur, India. 
+          This paper introduces a telemedicine system leveraging OceanNet for real-time medical assistance to marine fishermen.
+        </p>
+        <p><strong>DOI:</strong> <a href="https://doi.org/10.1109/ICCCNT51525.2021.9579678" target="_blank">Access Paper</a></p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2024 Rahul Podugu | Built with ❤️</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>

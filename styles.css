@@ -1,0 +1,279 @@
+/* General Styling */
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #0a0a0a; /* Dark theme */
+  color: #eaeaea; /* Light text */
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+}
+
+h2 {
+  text-align: center;
+  color: #ff8a00; /* Vibrant orange for section headings */
+  margin-bottom: 40px;
+}
+
+p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Navigation */
+.navbar {
+  background-color: #111; /* Darker navbar */
+  padding: 20px 0;
+  border-bottom: 1px solid #333;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.typed-text {
+  font-family: 'Courier New', monospace;
+  font-size: 1.2rem;
+  color: #61dafb; /* Light blue text for terminal style */
+}
+
+.cursor {
+  width: 8px; /* Thickness for the terminal pointer */
+  height: 20px; /* Matches the height of the text */
+  background-color: #61dafb; /* Terminal-style light blue */
+  display: inline-block; /* Inline with the text */
+  animation: blink 0.7s step-end infinite; /* Blinking effect */
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0; /* Disappear midway for blinking */
+  }
+}
+
+/* Navigation Links */
+.nav-links a {
+  margin-left: 20px;
+  color: #eaeaea;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #3498db; /* Blue on hover */
+}
+
+.nav-links .btn {
+  padding: 8px 15px;
+  background-color: #e91e63; /* Pink button */
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-links .btn i {
+  font-size: 1.2rem; /* Icon size */
+}
+
+.nav-links .btn:hover {
+  background-color: #ff4081; /* Lighter pink on hover */
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #ff8a00, #ff3d00, #8e44ad, #3498db); /* Vibrant gradient */
+  background-size: 300% 300%; /* Expand gradient for animation */
+  animation: bgAnimation 5s ease infinite; /* Smooth background animation */
+  color: white;
+}
+
+.hero .big-name {
+  font-size: 4rem; /* Large font size for name */
+  font-weight: 800; /* Bolder weight for visibility */
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;
+  background: linear-gradient(90deg, #ff8a00, #ff3d00, #3498db); /* Vibrant orange-red-blue gradient */
+  -webkit-background-clip: text; /* Clip gradient to text */
+  -webkit-text-fill-color: transparent; /* Make text transparent */
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin: 20px 0;
+  color: #dcdcdc; /* Subtle gray for description */
+}
+
+.hero-icons {
+  margin-top: 20px;
+}
+
+.hero-icons .social-icon {
+  margin: 0 10px;
+  color: #eaeaea; /* Light icon color */
+  font-size: 1.8rem; /* Icon size */
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.hero-icons .social-icon:hover {
+  color: #ff3d00; /* Vibrant red on hover */
+  transform: scale(1.1); /* Zoom effect on hover */
+}
+
+/* Background Animation */
+@keyframes bgAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Section Styling */
+section {
+  padding: 60px 20px;
+}
+
+section h2 {
+  text-align: center;
+  color: #8e44ad; /* Purple section title */
+  margin-bottom: 40px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Experience Section - Two-Column Timeline */
+.timeline {
+  padding: 60px 20px;
+}
+
+.timeline-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.timeline-left,
+.timeline-right {
+  width: 45%; /* Each column takes 45% of the width */
+}
+
+.timeline-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  background: linear-gradient(180deg, #ff3d00, #3498db); /* Gradient for the vertical line */
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #111; /* Darker background for items */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.timeline-item h3 {
+  font-size: 1.5rem;
+  color: #61dafb; /* Light blue for titles */
+  margin-bottom: 10px;
+}
+
+.timeline-item .institution,
+.timeline-item .company {
+  font-size: 1rem;
+  color: #ff8a00; /* Vibrant orange for institution or company name */
+  margin-bottom: 5px;
+}
+
+.timeline-item .date {
+  font-size: 0.9rem;
+  color: #aaa; /* Subtle gray for dates */
+  margin-bottom: 10px;
+}
+
+.timeline-item ul {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+.timeline-item ul li {
+  font-size: 1rem;
+  color: #dcdcdc; /* Muted text for list items */
+  margin-bottom: 5px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .timeline-wrapper {
+    flex-direction: column;
+  }
+
+  .timeline-left,
+  .timeline-right {
+    width: 100%;
+  }
+
+  .timeline-line {
+    display: none; /* Remove the line for smaller screens */
+  }
+}
+
+/* Projects Section */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.project-card {
+  background-color: #111;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.project-card h3 {
+  color: #ff3d00; /* Red for project titles */
+}
+
+/* Skills Section */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  text-align: center;
+}
+
+.skill-item h4 {
+  color: #3498db; /* Blue for skill titles */
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #111;
+  color: #eaeaea;
+}
