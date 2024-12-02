@@ -1,7 +1,7 @@
 // Typing effect for hero section
 document.addEventListener('DOMContentLoaded', () => {
   const typedText = document.querySelector('.hero .typed-text');
-  const textArray = ['Software Engineer', 'Full Stack Developer', 'Cloud Enthusiast'];
+  const textArray = ['Software Engineer', 'Full Stack Developer'];
   const typingDelay = 100;
   const erasingDelay = 50;
   const newTextDelay = 2000;
