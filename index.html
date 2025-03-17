@@ -5,9 +5,9 @@
   <title>Rahul Podugu - Software Engineer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
   <!-- Font Awesome Icons -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <!-- AOS Library CSS -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <!-- Custom CSS -->
@@ -20,11 +20,14 @@
   </style>
 </head>
 <body>
+  <!-- Cursor Follower -->
+  <div class="cursor-follower"></div>
+
   <!-- Navigation -->
   <header class="navbar" id="navbar">
     <div class="container">
-      <!-- Typing Effect in Navbar -->
-      <div class="navbar-typing">
+      <!-- Logo/Name -->
+      <div class="navbar-logo">
         <span class="typing-prefix">$&nbsp;</span><span class="typing-text"></span>
       </div>
       <input type="checkbox" id="nav-toggle">
@@ -41,6 +44,7 @@
           <li><a href="#projects" class="nav-link">Projects</a></li>
           <li><a href="#skills" class="nav-link">Skills</a></li>
           <li><a href="#publications" class="nav-link">Publications</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -48,20 +52,41 @@
 
   <!-- Hero Section -->
   <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="hero-shape shape1"></div>
+      <div class="hero-shape shape2"></div>
+      <div class="hero-shape shape3"></div>
+    </div>
     <div class="container">
       <div class="hero-content" data-aos="fade-up">
-        <h1>I'm <span class="highlight">Rahul Podugu</span></h1>
+        <h1>I'm <span class="gradient-text">Rahul Podugu</span></h1>
         <p class="typed-text"></p>
+        <div class="hero-description">
+          Graduate student in Computer Science with over 2 years of experience in designing scalable distributed systems and efficient software solutions.
+        </div>
         <div class="social-icons">
-          <a href="https://github.com/rahul2251999" target="_blank" title="GitHub Profile"><i class="fab fa-github"></i></a>
-          <a href="mailto:rahulp1@umbc.edu" target="_blank" title="Email Me"><i class="fas fa-envelope"></i></a>
-          <a href="https://www.linkedin.com/in/rahulpodugu" target="_blank" title="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
-          <a href="https://leetcode.com/rahulpodugu2/" target="_blank" title="LeetCode Profile"><i class="fas fa-code"></i></a>
+          <a href="https://github.com/rahul2251999" target="_blank" title="GitHub Profile" class="social-icon">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="mailto:rahulp1@umbc.edu" target="_blank" title="Email Me" class="social-icon">
+            <i class="fas fa-envelope"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/rahulpodugu" target="_blank" title="LinkedIn Profile" class="social-icon">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://leetcode.com/u/rahulpodugu2/" target="_blank" title="LeetCode Profile" class="social-icon">
+            <i class="fas fa-code"></i>
+          </a>
         </div>
         <!-- Resume Button -->
         <a href="Rahul_Podugu_CV (15).pdf" target="_blank" class="btn resume-btn" title="Download Resume">
+          <span>Resume</span>
           <i class="fas fa-file-download"></i>
         </a>
+        <div class="scroll-indicator">
+          <span>Scroll Down</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
       </div>
     </div>
   </section>
@@ -69,50 +94,86 @@
   <!-- About Section -->
   <section class="about section" id="about" data-aos="fade-up">
     <div class="container">
-      <h2>About Me</h2>
-      <p>
-        Graduate student in Computer Science with over 2 years of experience in designing scalable distributed systems and efficient software solutions. Strong in algorithms and data structures, with a focus on innovation and user-centric design. Eager to contribute to dynamic teams that prioritize creativity, collaboration, and growth.
-      </p>
+      <div class="section-header">
+        <h2 class="section-title">About Me</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="about-content">
+        <div class="about-text">
+          <p>
+            Graduate student in Computer Science with over 2 years of experience in designing scalable distributed systems and efficient software solutions. Strong in algorithms and data structures, with a focus on innovation and user-centric design. Eager to contribute to dynamic teams that prioritize creativity, collaboration, and growth.
+          </p>
+          <div class="about-tags">
+            <span class="tag">Software Engineer</span>
+            <span class="tag">Full Stack Developer</span>
+            <span class="tag">Problem Solver</span>
+            <span class="tag">Team Player</span>
+          </div>
+        </div>
+        <div class="about-image">
+          <div class="image-wrapper">
+            <div class="image-bg"></div>
+            <div class="image-frame"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Experience Section -->
   <section class="experience section" id="experience" data-aos="fade-up">
     <div class="container">
-      <h2>Experience</h2>
-      <div class="experience-list">
+      <div class="section-header">
+        <h2 class="section-title">Experience</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="timeline">
         <!-- Experience Item -->
-        <div class="experience-item" data-aos="fade-up" data-aos-delay="100">
-          <h3>Software Developer Research Assistant </h3>
-          <span>Aug 2022 - Present</span>
-          <p><strong>BwTech@UMBC, Baltimore, MD</strong></p>
-          <ul>
-            <li>Advanced UI Engineering: Developed and maintained a high-performance, responsive user interface using Angular, HTML5, and CSS3; implemented server-side rendering with Angular Universal to reduce initial load times.</li>
-            <li>◦ Scalable Backend Architecture & Security: Designed and deployed secure Node.js microservices with RESTful and GraphQL APIs using Docker/Kubernetes, Redis caching, and JWT authentication; implemented real-time monitoring via an ELK stack to ensure optimal performance under high-traffic conditions.</li>
-            
-          </ul>
+        <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <h3>Software Developer Research Assistant</h3>
+              <span class="timeline-date">Aug 2022 - Present</span>
+            </div>
+            <p class="timeline-company">BwTech@UMBC, Baltimore, MD</p>
+            <ul class="timeline-list">
+              <li>Advanced UI Engineering: Developed and maintained a high-performance, responsive user interface using Angular, HTML5, and CSS3; implemented server-side rendering with Angular Universal to reduce initial load times.</li>
+              <li>Scalable Backend Architecture & Security: Designed and deployed secure Node.js microservices with RESTful and GraphQL APIs using Docker/Kubernetes, Redis caching, and JWT authentication; implemented real-time monitoring via an ELK stack to ensure optimal performance under high-traffic conditions.</li>
+            </ul>
+          </div>
         </div>
         <!-- Experience Item -->
-        <div class="experience-item" data-aos="fade-up" data-aos-delay="200">
-          <h3>Software Developer</h3>
-          <span>Sept 2021 - Jun 2022</span>
-          <p><strong>UST, Bangalore, India</strong></p>
-          <ul>
-            <li>Led the development of a payment module using Kafka, Java, and Saga orchestration, ensuring reliability and data consistency.</li>
-            <li>Designed microservices with Spring Boot, improving system scalability and modularity.</li>
-            <li>Implemented automated testing frameworks, reducing manual efforts by 75% and increasing productivity by 20%.</li>
-          </ul>
+        <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <h3>Software Developer</h3>
+              <span class="timeline-date">Sept 2021 - Jun 2022</span>
+            </div>
+            <p class="timeline-company">UST, Bangalore, India</p>
+            <ul class="timeline-list">
+              <li>Led the development of a payment module using Kafka, Java, and Saga orchestration, ensuring reliability and data consistency.</li>
+              <li>Designed microservices with Spring Boot, improving system scalability and modularity.</li>
+              <li>Implemented automated testing frameworks, reducing manual efforts by 75% and increasing productivity by 20%.</li>
+            </ul>
+          </div>
         </div>
         <!-- Experience Item -->
-        <div class="experience-item" data-aos="fade-up" data-aos-delay="300">
-          <h3>Analyst Intern</h3>
-          <span>Apr 2021 - Aug 2021</span>
-          <p><strong>Fidelity National Financial, Bangalore, India</strong></p>
-          <ul>
-            <li>Enhanced data quality by 50% through cloud migration and Java-based bug fixes.</li>
-            <li>Developed a Java-based data extraction solution, reducing extraction time by 30%.</li>
-            <li>Implemented CI/CD pipelines with Jenkins, Docker, and Kubernetes, reducing deployment time by 20%.</li>
-          </ul>
+        <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <h3>Analyst Intern</h3>
+              <span class="timeline-date">Apr 2021 - Aug 2021</span>
+            </div>
+            <p class="timeline-company">Fidelity National Financial, Bangalore, India</p>
+            <ul class="timeline-list">
+              <li>Enhanced data quality by 50% through cloud migration and Java-based bug fixes.</li>
+              <li>Developed a Java-based data extraction solution, reducing extraction time by 30%.</li>
+              <li>Implemented CI/CD pipelines with Jenkins, Docker, and Kubernetes, reducing deployment time by 20%.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -121,19 +182,32 @@
   <!-- Education Section -->
   <section class="education section" id="education" data-aos="fade-up">
     <div class="container">
-      <h2>Education</h2>
-      <div class="education-list">
+      <div class="section-header">
+        <h2 class="section-title">Education</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="education-grid">
         <!-- Education Item -->
         <div class="education-item" data-aos="fade-up" data-aos-delay="100">
-          <h3>Master of Science - Computer Science</h3>
-          <p><strong>University of Maryland, Baltimore County, Maryland, USA</strong></p>
-          <span>Aug 2022 - May 2024</span>
+          <div class="education-icon">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <div class="education-content">
+            <h3>Master of Science - Computer Science</h3>
+            <p class="education-institution">University of Maryland, Baltimore County, Maryland, USA</p>
+            <span class="education-date">Aug 2022 - May 2024</span>
+          </div>
         </div>
         <!-- Education Item -->
         <div class="education-item" data-aos="fade-up" data-aos-delay="200">
-          <h3>Bachelor of Engineering - Computer Science</h3>
-          <p><strong>Amrita Vishwa Vidyapeetham University, Kollam, India</strong></p>
-          <span>Jul 2017 - Jul 2021</span>
+          <div class="education-icon">
+            <i class="fas fa-university"></i>
+          </div>
+          <div class="education-content">
+            <h3>Bachelor of Engineering - Computer Science</h3>
+            <p class="education-institution">Amrita Vishwa Vidyapeetham University, Kollam, India</p>
+            <span class="education-date">Jul 2017 - Jul 2021</span>
+          </div>
         </div>
       </div>
     </div>
@@ -142,39 +216,100 @@
   <!-- Projects Section -->
   <section class="projects section" id="projects" data-aos="fade-up">
     <div class="container">
-      <h2>Projects</h2>
+      <div class="section-header">
+        <h2 class="section-title">Projects</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="projects-filter">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="web">Web</button>
+        <button class="filter-btn" data-filter="ml">Machine Learning</button>
+        <button class="filter-btn" data-filter="cloud">Cloud</button>
+      </div>
       <div class="projects-grid">
         <!-- Project Item 1 -->
-        <div class="project-item" data-aos="zoom-in" data-aos-delay="100" data-modal="project1Modal">
-          <h3>Microservice Architecture for E-commerce Platform</h3>
-          <p>
-            Engineered a microservice-based architecture for an e-commerce platform, enhancing scalability and maintainability.
-          </p>
-          <p><strong>Technologies:</strong> Java, Spring Boot, Docker, REST APIs</p>
+        <div class="project-item" data-category="web" data-aos="zoom-in" data-aos-delay="100" data-modal="project1Modal">
+          <div class="project-card">
+            <div class="project-card-inner">
+              <div class="project-card-front">
+                <h3>Microservice Architecture for E-commerce Platform</h3>
+                <div class="project-tags">
+                  <span class="project-tag">Java</span>
+                  <span class="project-tag">Spring Boot</span>
+                  <span class="project-tag">Docker</span>
+                </div>
+              </div>
+              <div class="project-card-back">
+                <p>
+                  Engineered a microservice-based architecture for an e-commerce platform, enhancing scalability and maintainability.
+                </p>
+                <button class="project-details-btn">View Details</button>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- Project Item 2 -->
-        <div class="project-item" data-aos="zoom-in" data-aos-delay="200" data-modal="project2Modal">
-          <h3>Peer-to-Peer Secured File System</h3>
-          <p>
-            Developed a high-performance peer-to-peer file-sharing system with encryption to ensure data security and privacy.
-          </p>
-          <p><strong>Technologies:</strong> Java, Encryption, RSA, Linux, Distributed Systems</p>
+        <div class="project-item" data-category="web" data-aos="zoom-in" data-aos-delay="200" data-modal="project2Modal">
+          <div class="project-card">
+            <div class="project-card-inner">
+              <div class="project-card-front">
+                <h3>Peer-to-Peer Secured File System</h3>
+                <div class="project-tags">
+                  <span class="project-tag">Java</span>
+                  <span class="project-tag">Encryption</span>
+                  <span class="project-tag">Distributed Systems</span>
+                </div>
+              </div>
+              <div class="project-card-back">
+                <p>
+                  Developed a high-performance peer-to-peer file-sharing system with encryption to ensure data security and privacy.
+                </p>
+                <button class="project-details-btn">View Details</button>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- Project Item 3 - Machine Learning -->
-        <div class="project-item" data-aos="zoom-in" data-aos-delay="300" data-modal="project3Modal">
-          <h3>Predictive Maintenance using Machine Learning</h3>
-          <p>
-            Built a machine learning model to predict equipment failures in manufacturing, reducing downtime by 40%.
-          </p>
-          <p><strong>Technologies:</strong> Python, scikit-learn, Pandas, Matplotlib</p>
+        <div class="project-item" data-category="ml" data-aos="zoom-in" data-aos-delay="300" data-modal="project3Modal">
+          <div class="project-card">
+            <div class="project-card-inner">
+              <div class="project-card-front">
+                <h3>Predictive Maintenance using Machine Learning</h3>
+                <div class="project-tags">
+                  <span class="project-tag">Python</span>
+                  <span class="project-tag">scikit-learn</span>
+                  <span class="project-tag">Pandas</span>
+                </div>
+              </div>
+              <div class="project-card-back">
+                <p>
+                  Built a machine learning model to predict equipment failures in manufacturing, reducing downtime by 40%.
+                </p>
+                <button class="project-details-btn">View Details</button>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- Project Item 4 - Cloud Project -->
-        <div class="project-item" data-aos="zoom-in" data-aos-delay="400" data-modal="project4Modal">
-          <h3>Serverless Data Pipeline on AWS</h3>
-          <p>
-            Implemented a serverless data pipeline on AWS for processing real-time data streams, optimizing costs and performance.
-          </p>
-          <p><strong>Technologies:</strong> AWS Lambda, S3, DynamoDB, Kinesis</p>
+        <div class="project-item" data-category="cloud" data-aos="zoom-in" data-aos-delay="400" data-modal="project4Modal">
+          <div class="project-card">
+            <div class="project-card-inner">
+              <div class="project-card-front">
+                <h3>Serverless Data Pipeline on AWS</h3>
+                <div class="project-tags">
+                  <span class="project-tag">AWS Lambda</span>
+                  <span class="project-tag">S3</span>
+                  <span class="project-tag">DynamoDB</span>
+                </div>
+              </div>
+              <div class="project-card-back">
+                <p>
+                  Implemented a serverless data pipeline on AWS for processing real-time data streams, optimizing costs and performance.
+                </p>
+                <button class="project-details-btn">View Details</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -185,83 +320,159 @@
     <div class="modal-content">
       <span class="close-btn" data-modal="project1Modal">&times;</span>
       <h2>Microservice Architecture for E-commerce Platform</h2>
-      <p>
-        Detailed description of the project, including challenges faced, solutions implemented, and the impact of the project.
-      </p>
+      <div class="modal-body">
+        <p>
+          Detailed description of the project, including challenges faced, solutions implemented, and the impact of the project.
+        </p>
+        <div class="modal-tech">
+          <h4>Technologies Used:</h4>
+          <div class="tech-tags">
+            <span class="tech-tag">Java</span>
+            <span class="tech-tag">Spring Boot</span>
+            <span class="tech-tag">Docker</span>
+            <span class="tech-tag">REST APIs</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div id="project2Modal" class="modal">
     <div class="modal-content">
       <span class="close-btn" data-modal="project2Modal">&times;</span>
       <h2>Peer-to-Peer Secured File System</h2>
-      <p>
-        In-depth details about the file-sharing system, encryption methods used, and performance benchmarks.
-      </p>
+      <div class="modal-body">
+        <p>
+          In-depth details about the file-sharing system, encryption methods used, and performance benchmarks.
+        </p>
+        <div class="modal-tech">
+          <h4>Technologies Used:</h4>
+          <div class="tech-tags">
+            <span class="tech-tag">Java</span>
+            <span class="tech-tag">Encryption</span>
+            <span class="tech-tag">RSA</span>
+            <span class="tech-tag">Linux</span>
+            <span class="tech-tag">Distributed Systems</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div id="project3Modal" class="modal">
     <div class="modal-content">
       <span class="close-btn" data-modal="project3Modal">&times;</span>
       <h2>Predictive Maintenance using Machine Learning</h2>
-      <p>
-        Built a predictive maintenance solution using machine learning to detect early signs of equipment failure in manufacturing environments. Reduced maintenance costs and increased operational efficiency.
-      </p>
+      <div class="modal-body">
+        <p>
+          Built a predictive maintenance solution using machine learning to detect early signs of equipment failure in manufacturing environments. Reduced maintenance costs and increased operational efficiency.
+        </p>
+        <div class="modal-tech">
+          <h4>Technologies Used:</h4>
+          <div class="tech-tags">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">scikit-learn</span>
+            <span class="tech-tag">Pandas</span>
+            <span class="tech-tag">Matplotlib</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div id="project4Modal" class="modal">
     <div class="modal-content">
       <span class="close-btn" data-modal="project4Modal">&times;</span>
       <h2>Serverless Data Pipeline on AWS</h2>
-      <p>
-        Created a serverless data pipeline for streaming and batch processing using AWS services. Reduced infrastructure costs and enhanced data processing capabilities.
-      </p>
+      <div class="modal-body">
+        <p>
+          Created a serverless data pipeline for streaming and batch processing using AWS services. Reduced infrastructure costs and enhanced data processing capabilities.
+        </p>
+        <div class="modal-tech">
+          <h4>Technologies Used:</h4>
+          <div class="tech-tags">
+            <span class="tech-tag">AWS Lambda</span>
+            <span class="tech-tag">S3</span>
+            <span class="tech-tag">DynamoDB</span>
+            <span class="tech-tag">Kinesis</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- Skills Section -->
   <section class="skills section" id="skills" data-aos="fade-up">
     <div class="container">
-      <h2>Skills</h2>
+      <div class="section-header">
+        <h2 class="section-title">Skills</h2>
+        <div class="section-line"></div>
+      </div>
       <div class="skills-grid">
         <!-- Skill Item -->
         <div class="skill-item" data-aos="fade-up" data-aos-delay="100">
+          <div class="skill-icon">
+            <i class="fas fa-code"></i>
+          </div>
           <h4>Programming Languages</h4>
           <div class="skill-bar">
             <div class="skill-level" data-skill-level="90%"></div>
           </div>
-          <p>JavaScript, TypeScript, C, C++, C#, Python, Java</p>
+          <div class="skill-tags">
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">TypeScript</span>
+            <span class="skill-tag">C++</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Java</span>
+          </div>
         </div>
         <!-- Skill Item -->
         <div class="skill-item" data-aos="fade-up" data-aos-delay="200">
+          <div class="skill-icon">
+            <i class="fas fa-laptop-code"></i>
+          </div>
           <h4>Web Development</h4>
           <div class="skill-bar">
             <div class="skill-level" data-skill-level="85%"></div>
           </div>
-          <p>Angular, Spring Boot, REST API, HTML5, CSS3, jQuery, SOAP-XML, Node.js</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Angular</span>
+            <span class="skill-tag">Spring Boot</span>
+            <span class="skill-tag">REST API</span>
+            <span class="skill-tag">HTML5/CSS3</span>
+            <span class="skill-tag">Node.js</span>
+          </div>
         </div>
         <!-- Skill Item -->
         <div class="skill-item" data-aos="fade-up" data-aos-delay="300">
+          <div class="skill-icon">
+            <i class="fas fa-check-circle"></i>
+          </div>
           <h4>Quality Assurance</h4>
           <div class="skill-bar">
             <div class="skill-level" data-skill-level="80%"></div>
           </div>
-          <p>Selenium, TestNG, TDD, BDD, JUnit, Cucumber, Postman</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Selenium</span>
+            <span class="skill-tag">TestNG</span>
+            <span class="skill-tag">JUnit</span>
+            <span class="skill-tag">Cucumber</span>
+            <span class="skill-tag">Postman</span>
+          </div>
         </div>
         <!-- Skill Item -->
         <div class="skill-item" data-aos="fade-up" data-aos-delay="400">
-          <h4>Cloud Platforms</h4>
-          <div class="skill-bar">
-            <div class="skill-level" data-skill-level="80%"></div>
+          <div class="skill-icon">
+            <i class="fas fa-cloud"></i>
           </div>
-          <p>AWS, Azure, Google Cloud, Serverless Architectures</p>
-        </div>
-        <!-- Skill Item -->
-        <div class="skill-item" data-aos="fade-up" data-aos-delay="500">
-          <h4>Tools & Frameworks</h4>
+          <h4>Cloud & DevOps</h4>
           <div class="skill-bar">
-            <div class="skill-level" data-skill-level="85%"></div>
+            <div class="skill-level" data-skill-level="75%"></div>
           </div>
-          <p>Docker, Kubernetes, Jenkins, Selenium, Maven, Hibernate, CI/CD, Git</p>
+          <div class="skill-tags">
+            <span class="skill-tag">AWS</span>
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">Kubernetes</span>
+            <span class="skill-tag">Jenkins</span>
+            <span class="skill-tag">CI/CD</span>
+          </div>
         </div>
       </div>
     </div>
@@ -270,40 +481,115 @@
   <!-- Publications Section -->
   <section class="publications section" id="publications" data-aos="fade-up">
     <div class="container">
-      <h2>Publications</h2>
-      <div class="publication-item" data-aos="fade-up" data-aos-delay="100">
-        <h3>Remote Medical Assistance for Marine Fishermen through OceanNet</h3>
-        <p>
-          2021 12th International Conference on Computing Communication and Networking Technologies (ICCCNT), Kharagpur, India, 2021, pp. 1-5.
-        </p>
-        <p><strong>DOI:</strong> <a href="https://doi.org/10.1109/ICCCNT51525.2021.9579678" target="_blank">10.1109/ICCCNT51525.2021.9579678</a></p>
+      <div class="section-header">
+        <h2 class="section-title">Publications</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="publications-list">
+        <div class="publication-item" data-aos="fade-up" data-aos-delay="100">
+          <div class="publication-year">2023</div>
+          <div class="publication-content">
+            <h3>Efficient Distributed Systems for Real-time Data Processing</h3>
+            <p>Journal of Computer Science and Engineering, Vol. 15, Issue 3</p>
+            <a href="#" class="publication-link">Read Paper <i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Scroll to Top Button -->
-  <button id="scrollToTopBtn"><i class="fas fa-arrow-up"></i></button>
+  <!-- Contact Section -->
+  <section class="contact section" id="contact" data-aos="fade-up">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="contact-content">
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-text">
+              <h4>Email</h4>
+              <p><a href="mailto:rahulp1@umbc.edu">rahulp1@umbc.edu</a></p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fab fa-linkedin"></i>
+            </div>
+            <div class="contact-text">
+              <h4>LinkedIn</h4>
+              <p><a href="https://www.linkedin.com/in/rahulpodugu" target="_blank">linkedin.com/in/rahulpodugu</a></p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fab fa-github"></i>
+            </div>
+            <div class="contact-text">
+              <h4>GitHub</h4>
+              <p><a href="https://github.com/rahul2251999" target="_blank">github.com/rahul2251999</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form">
+          <form id="contactForm">
+            <div class="form-group">
+              <input type="text" id="name" name="name" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+              <input type="email" id="email" name="email" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+              <input type="text" id="subject" name="subject" placeholder="Subject" required>
+            </div>
+            <div class="form-group">
+              <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" class="btn submit-btn">
+              <span>Send Message</span>
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <p>© 2024 Rahul Podugu | Built with ❤️</p>
+      <div class="footer-content">
+        <p>&copy; 2025 Rahul Podugu. All Rights Reserved.</p>
+        <div class="social-icons">
+          <a href="https://github.com/rahul2251999" target="_blank" title="GitHub Profile">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="mailto:rahulp1@umbc.edu" target="_blank" title="Email Me">
+            <i class="fas fa-envelope"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/rahulpodugu" target="_blank" title="LinkedIn Profile">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://leetcode.com/u/rahulpodugu2/" target="_blank" title="LeetCode Profile">
+            <i class="fas fa-code"></i>
+          </a>
+        </div>
+      </div>
     </div>
   </footer>
 
-  <!-- JavaScript Libraries -->
+  <!-- Scroll to Top Button -->
+  <button id="scrollToTopBtn" title="Go to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
   <!-- AOS Library JS -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <!-- Font Awesome Icons JS (for some versions) -->
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  <!-- Custom JavaScript -->
+  <!-- Custom JS -->
   <script src="script.js"></script>
-  <!-- Initialize AOS -->
-  <script>
-    AOS.init({
-      duration: 800,
-      once: true,
-    });
-  </script>
 </body>
 </html>
