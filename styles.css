@@ -1493,3 +1493,12 @@ body.light-mode .navbar.scrolled {
 .mb-xl {
   margin-bottom: var(--space-xl);
 }
+
+/* Profile Picture Styling */
+.profile-picture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the frame without distortion */
+  border-radius: inherit; /* Inherits the border-radius from the parent frame */
+  display: block; /* Removes any extra space below the image */
+}
