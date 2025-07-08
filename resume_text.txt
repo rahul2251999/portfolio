@@ -1,0 +1,106 @@
+RAHUL PODUGU
+United States
+(443) 983-5865 — rahulp1@umbc.edu
+linkedin.com/in/rahulpodugu — github.com/Rahul2251999
+
+PROFESSIONAL SUMMARY
+Software Engineer with over 2 years of experience in Java development, Spring Boot microservices, and cloud-native applications on AWS. Skilled in designing scalable payment systems, implementing AI/ML solutions, and optimizing application
+performance. Experienced in Agile methodologies, CI/CD pipelines, and containerization with Docker and Kubernetes.
+Passionate about leveraging AI, microservices architecture, and cloud technologies to build robust enterprise solutions.
+
+TECHNICAL SKILLS
+• Programming Languages: Java, Python, JavaScript, TypeScript, C++, C#, Kotlin
+• Frameworks & Libraries: Spring Boot, Spring Framework, Node.js, Express, Angular, React, REST APIs, GraphQL,
+gRPC, FastAPI
+• Cloud & DevOps: AWS (EC2, Lambda, S3, CloudWatch), Azure, Docker, Kubernetes, Jenkins, Git, CI/CD, Terraform, Helm
+• Data & AI: PostgreSQL, MongoDB, Redis, Apache Kafka, TensorFlow, scikit-learn, FAISS, Pinecone, LangChain,
+OpenAI API
+• Testing & Agile: Selenium, JUnit, Mockito, Jest, Postman, TDD/BDD, Scrum, Kanban, Jira
+
+PROFESSIONAL EXPERIENCE
+Software Developer
+Aztra
+
+May 2024 – Present
+Baltimore, MD
+
+• Architected and implemented Java Spring Boot microservices for payment processing on AWS, handling 100K+ daily
+transactions with 99.9% uptime
+• Integrated Apache Kafka for event-driven architecture, implementing Saga pattern for distributed transactions, reducing
+latency by 40%
+• Developed AI-powered customer support system using LangChain with GPT-4 and Claude, automating 30% of payment
+queries with RAG flows
+• Built vector search system with FAISS to index payment documentation and logs, improving chatbot response accuracy
+by 25%
+• Optimized database performance through SQL query tuning and Redis caching implementation, reducing API response
+time by 30%
+• Conducted JMeter load testing and implemented AWS auto-scaling with load balancing, achieving 99th percentile latency
+under 150ms for 50K+ users
+• Led 7-member Scrum team through 2-week sprints, implementing CI/CD pipelines with GitHub Actions and Jenkins for
+automated testing and deployment
+• Containerized microservices with Docker and Kubernetes, integrating AWS monitoring with Prometheus and CloudWatch
+for 40% faster incident recovery
+Software Developer (Research Assistant)
+Sept 2022 – Nov 2023
+University of Maryland, Baltimore County (UMBC)
+Baltimore, MD
+• Developed real-time research dashboard using Angular with server-side rendering (Angular Universal), reducing initial
+load time by 40%
+• Engineered scalable Node.js backend with Express and GraphQL on Kubernetes, supporting 10K+ concurrent users
+• Implemented Redis caching and database optimization strategies, reducing API latency by 35% and improving overall
+system performance
+• Secured sensitive research data with JWT authentication and role-based access control (RBAC), ensuring compliance
+with university data policies
+• Collaborated with research teams to translate complex data visualization requirements into interactive dashboard components
+Software Developer
+Sept 2021 – Jun 2022
+UST
+Bangalore, India
+• Designed and implemented payment workflows using Java, Kafka, and Saga orchestration pattern, ensuring ACID com-
+
+pliance for distributed transactions
+• Increased transaction reliability by 45% for 10K+ daily transactions through improved error handling and recovery
+mechanisms
+• Optimized Spring Boot microservices with enhanced REST communication and asynchronous messaging, boosting
+throughput by 30% across 5 services
+• Developed robust REST APIs with real-time validation and concurrency controls, improving warehouse inventory accuracy by 25%
+• Implemented rollback logic and transaction boundaries for data consistency across distributed systems
+• Built comprehensive test suites using Selenium WebDriver, JUnit, and Mockito in a TDD environment, reducing manual
+QA effort by 75%
+• Led Agile ceremonies and Kanban workflows as acting Scrum Lead for a 6-member team, increasing delivery velocity by
+25%
+Analyst Intern
+Apr 2021 – Aug 2021
+Fidelity National Financial
+Bangalore, India
+• Streamlined ETL pipelines for Oracle-to-Redshift migration, resolving 200+ Java/SQL issues and improving data quality
+by 50%
+• Developed a Java-based automation tool for data extraction and transformation, cutting processing time by 30%
+• Optimized Hibernate queries and Java modules, reducing system crashes by 40% through memory leak fixes
+• Implemented CI/CD pipelines with Jenkins and Docker on AWS, automating Kubernetes deployments with YAML scripts
+
+PROJECTS
+Decentralized File Sharing System
+P2P file sharing application with RSA/AES encryption and DHT indexing using Java and Linux io uring. Implemented
+multithreaded architecture achieving 3x faster access times compared to traditional file sharing systems.
+https://github.com/Rahul2251999/Peer-to-Peer-Secured-File-System
+Real-Time Stock Trading Engine
+Developed a high-performance matching engine using lock-free concurrency with Compare-And-Swap (CAS) operations
+in Java. Achieved sub-millisecond latency for processing 1,000+ stock tickers simultaneously. Implemented order book
+management with price-time priority queue. https://github.com/Rahul2251999/stock-trading-engine
+AI Customer Support Chatbot
+Built an intelligent customer support system with Azure Bot Services, LUIS, and custom NLP stack. Handles 1,000+
+queries daily with 60% improved resolution rate. Implemented intent recognition, entity extraction, and sentiment analysis
+for personalized responses. https://github.com/Rahul2251999/AI-Powered-Customer-Support-Chatbot
+
+EDUCATION
+M.S. in Computer Science
+Aug 2022 – May 2024
+University of Maryland, Baltimore County (UMBC)
+GPA: 3.8/4.0 Relevant Coursework: Advanced Algorithms,
+Distributed Systems, Machine Learning, Cloud Computing, Big Data Analytics
+
+PUBLICATIONS
+• ”Remote Medical Assistance for Marine Fishermen through OceanNet”, IEEE ICCCNT 2021, DOI: 10.1109/ICCCNT51525.2021.9579678
+
+
