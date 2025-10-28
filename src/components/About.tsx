@@ -1,5 +1,4 @@
 import { Github, Instagram, Linkedin, Twitter, Code } from 'lucide-react';
-import { StarButton } from './ui/star-button';
 import { AnimatedSocialIcons } from './ui/floating-action-button';
 
 export function About() {
