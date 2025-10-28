@@ -49,7 +49,7 @@ export function NavBar({ items, className }: NavBarProps) {
         className,
       )}
     >
-      <div className="flex items-center gap-3 bg-pure-black/80 border border-dark-gray backdrop-blur-lg py-1 px-1 rounded-full shadow-lg">
+      <div className="flex items-center gap-3 bg-pure-black/80 border border-border/60 backdrop-blur-lg py-1 px-1 rounded-full shadow-lg">
         {items.map((item) => {
           const Icon = item.icon
           const isActive = activeTab === item.name
@@ -60,10 +60,12 @@ export function NavBar({ items, className }: NavBarProps) {
               href={item.url}
               onClick={() => setActiveTab(item.name)}
               className={cn(
-                "relative cursor-pointer text-sm font-semibold px-6 py-2 rounded-full transition-colors",
+                "relative cursor-pointer text-sm font-semibold px-6 py-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-accent-white/50 focus:ring-offset-2 focus:ring-offset-pure-black",
                 "text-accent-gray hover:text-accent-white",
-                isActive && "bg-dark-gray text-accent-white",
+                isActive && "bg-background/60 text-accent-white",
               )}
+              aria-label={`Navigate to ${item.name} section`}
+              aria-current={isActive ? "page" : undefined}
             >
               <span className="hidden md:inline">{item.name}</span>
               <span className="md:hidden">

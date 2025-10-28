@@ -12,7 +12,7 @@ export function About() {
   ];
 
   return (
-    <section className="section py-20 bg-pure-black" id="about">
+    <section className="section py-24 bg-pure-black" id="about">
       <div className="container mx-auto px-4">
         <div className="mx-auto mb-12 max-w-4xl px-0 md:px-4 lg:px-6">
           <h2 className="text-left text-lg md:text-4xl font-bold text-accent-white mb-4">About Me</h2>
@@ -37,15 +37,19 @@ export function About() {
             </p>
             <div className="pt-4">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
-                <StarButton
-                  className="px-6 py-3 text-base text-accent-white"
-                  backgroundColor="#000000"
-                  lightColor="#86efac"
-                  onClick={() => window.open('resume.pdf', '_blank', 'noopener,noreferrer')}
+                <a
+                  href="Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download="Rahul_Podugu_Resume.pdf"
+                  className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-accent-white bg-background/60 border border-border/60 rounded-3xl transition-all duration-300 hover:bg-background/80 hover:border-accent-white/40 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-accent-white/50 focus:ring-offset-2 focus:ring-offset-pure-black"
                 >
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
                   Resume
-                </StarButton>
-                <div className="pointer-events-auto">
+                </a>
+                <div>
                   <AnimatedSocialIcons
                     icons={socialIcons}
                     iconSize={18}

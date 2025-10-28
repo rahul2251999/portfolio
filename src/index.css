@@ -105,16 +105,22 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #1f2937;
+  background: #0a0a0a;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #06b6d4;
+  background: #4a4a4a;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #0891b2;
+  background: #6a6a6a;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #4a4a4a #0a0a0a;
 }
 
 /* Particles container */

@@ -151,7 +151,7 @@ export function TimelineDemo() {
           Roles that shaped my systems thinking—from fintech payments to AI research and large-scale distributed platforms.
         </p>
       </div>
-      <div className="mx-auto max-w-7xl px-0 md:px-4 lg:px-6">
+      <div className="mx-auto max-w-6xl px-0 md:px-4 lg:px-6">
         <Timeline data={data} />
       </div>
     </div>

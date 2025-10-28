@@ -94,7 +94,7 @@ export function Skills() {
   return (
     <section id="skills" className="relative border-t border-dark-gray bg-pure-black py-24">
       <div className="container mx-auto px-4">
-        <div className="mx-auto mb-12 max-w-3xl text-center">
+        <div className="mx-auto mb-12 max-w-6xl text-center">
           <span className="text-sm uppercase tracking-[0.4em] text-accent-gray">Skills</span>
           <h2 className="mt-4 text-4xl font-bold text-accent-white sm:text-5xl">Technical Orbit</h2>
           <p className="mt-4 text-accent-gray">
@@ -102,7 +102,7 @@ export function Skills() {
           </p>
         </div>
 
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-6xl">
           <RadialOrbitalTimeline timelineData={skillsTimeline} />
         </div>
 

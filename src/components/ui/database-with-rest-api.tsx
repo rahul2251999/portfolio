@@ -106,21 +106,23 @@ const DatabaseWithRestApi = ({
           {/* First Button */}
           <g>
             <rect
-              fill="#18181B"
+              fill="currentColor"
               x="14"
               y="5"
               width="34"
               height="10"
               rx="5"
+              className="fill-dark-gray"
             ></rect>
             <DatabaseIcon x="18" y="7.5"></DatabaseIcon>
             <text
               x="28"
               y="12"
-              fill="white"
+              fill="currentColor"
               stroke="none"
               fontSize="5"
               fontWeight="500"
+              className="fill-accent-white"
             >
               {badgeTexts?.first || "GET"}
             </text>
@@ -128,21 +130,23 @@ const DatabaseWithRestApi = ({
           {/* Second Button */}
           <g>
             <rect
-              fill="#18181B"
+              fill="currentColor"
               x="60"
               y="5"
               width="34"
               height="10"
               rx="5"
+              className="fill-dark-gray"
             ></rect>
             <DatabaseIcon x="64" y="7.5"></DatabaseIcon>
             <text
               x="74"
               y="12"
-              fill="white"
+              fill="currentColor"
               stroke="none"
               fontSize="5"
               fontWeight="500"
+              className="fill-accent-white"
             >
               {badgeTexts?.second || "POST"}
             </text>
@@ -150,21 +154,23 @@ const DatabaseWithRestApi = ({
           {/* Third Button */}
           <g>
             <rect
-              fill="#18181B"
+              fill="currentColor"
               x="108"
               y="5"
               width="34"
               height="10"
               rx="5"
+              className="fill-dark-gray"
             ></rect>
             <DatabaseIcon x="112" y="7.5"></DatabaseIcon>
             <text
               x="122"
               y="12"
-              fill="white"
+              fill="currentColor"
               stroke="none"
               fontSize="5"
               fontWeight="500"
+              className="fill-accent-white"
             >
               {badgeTexts?.third || "PUT"}
             </text>
@@ -172,21 +178,23 @@ const DatabaseWithRestApi = ({
           {/* Fourth Button */}
           <g>
             <rect
-              fill="#18181B"
+              fill="currentColor"
               x="150"
               y="5"
               width="40"
               height="10"
               rx="5"
+              className="fill-dark-gray"
             ></rect>
             <DatabaseIcon x="154" y="7.5"></DatabaseIcon>
             <text
               x="165"
               y="12"
-              fill="white"
+              fill="currentColor"
               stroke="none"
               fontSize="5"
               fontWeight="500"
+              className="fill-accent-white"
             >
               {badgeTexts?.fourth || "DELETE"}
             </text>
@@ -237,24 +245,24 @@ const DatabaseWithRestApi = ({
         {/* bottom shadow */}
         <div className="absolute -bottom-4 h-[100px] w-[62%] rounded-lg bg-accent/30" />
         {/* box title */}
-        <div className="absolute -top-3 z-20 flex items-center justify-center rounded-lg border bg-[#101112] px-2 py-1 sm:-top-4 sm:py-1.5">
+        <div className="absolute -top-3 z-20 flex items-center justify-center rounded-lg border border-border/60 bg-background/60 px-2 py-1 sm:-top-4 sm:py-1.5">
           <SparklesIcon className="size-3" />
           <span className="ml-2 text-[10px]">
             {title ? title : "Data exchange using a customized REST API"}
           </span>
         </div>
         {/* box outter circle */}
-        <div className="absolute -bottom-8 z-30 grid h-[60px] w-[60px] place-items-center rounded-full border-t bg-[#141516] font-semibold text-xs">
+        <div className="absolute -bottom-8 z-30 grid h-[60px] w-[60px] place-items-center rounded-full border-t border-border/60 bg-background/60 font-semibold text-xs">
           {circleText ? circleText : "SVG"}
         </div>
         {/* box content */}
         <div className="relative z-10 flex h-[150px] w-full items-center justify-center overflow-hidden rounded-lg border bg-background shadow-md">
           {/* Badges */}
-          <div className="absolute bottom-8 left-12 z-10 h-7 rounded-full bg-[#101112] px-3 text-xs border flex items-center gap-2 ">
+          <div className="absolute bottom-8 left-12 z-10 h-7 rounded-full bg-background/60 px-3 text-xs border border-border/60 flex items-center gap-2 ">
             <HeartHandshakeIcon className="size-4" />
             <span>{buttonTexts?.first || "LegionDev"}</span>
           </div>
-          <div className="absolute right-16 z-10 hidden h-7 rounded-full bg-[#101112] px-3 text-xs sm:flex border items-center gap-2">
+          <div className="absolute right-16 z-10 hidden h-7 rounded-full bg-background/60 px-3 text-xs sm:flex border border-border/60 items-center gap-2">
             <Folder className="size-4" />
             <span>{buttonTexts?.second || "v2_updates"}</span>
           </div>
@@ -305,10 +313,11 @@ const DatabaseIcon = ({ x = "0", y = "0" }: { x: string; y: string }) => {
       height="5"
       viewBox="0 0 24 24"
       fill="none"
-      stroke="white"
+      stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      className="stroke-accent-white"
     >
       <ellipse cx="12" cy="5" rx="9" ry="3" />
       <path d="M3 5V19A9 3 0 0 0 21 19V5" />

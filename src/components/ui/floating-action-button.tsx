@@ -23,7 +23,7 @@ export function AnimatedSocialIcons({
   className,
   iconSize = 20
 }: AnimatedSocialIconsProps) {
-  const [active, setActive] = useState(true)
+  const [active, setActive] = useState(false)
 
   const buttonSize = "h-12 w-12 sm:h-14 sm:w-14"
 
@@ -32,9 +32,15 @@ export function AnimatedSocialIcons({
       <motion.button
         className={cn(
           buttonSize,
-          "flex items-center justify-center rounded-full bg-primary transition-colors hover:bg-primary/90"
+          "flex items-center justify-center rounded-full bg-primary transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-pure-black"
         )}
         onClick={() => setActive(!active)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            setActive(!active);
+          }
+        }}
         animate={{ rotate: active ? 45 : 0 }}
         transition={{
           type: "tween",
@@ -42,6 +48,7 @@ export function AnimatedSocialIcons({
           duration: 0.35,
         }}
         aria-label={active ? "Close social links" : "Open social links"}
+        aria-expanded={active}
       >
         <Plus
           size={iconSize}
@@ -55,7 +62,7 @@ export function AnimatedSocialIcons({
           key={index}
           className={cn(
             buttonSize,
-            "flex items-center justify-center rounded-full border border-border bg-background shadow-lg transition-all hover:shadow-xl",
+            "flex items-center justify-center rounded-full border border-border/60 bg-background/60 shadow-lg transition-all hover:shadow-xl",
             className
           )}
           initial={{ opacity: 0, x: -12, scale: 0.85, rotate: -15 }}
@@ -77,7 +84,7 @@ export function AnimatedSocialIcons({
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center"
+              className="flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-accent-white/50 focus:ring-offset-2 focus:ring-offset-pure-black rounded-full"
               aria-label={label ?? "Open social link"}
             >
               <Icon
@@ -86,10 +93,12 @@ export function AnimatedSocialIcons({
               />
             </a>
           ) : (
-            <Icon
-              size={iconSize}
-              className="text-muted-foreground transition-transform duration-200 hover:scale-110 hover:text-foreground"
-            />
+            <div className="flex items-center justify-center">
+              <Icon
+                size={iconSize}
+                className="text-muted-foreground transition-transform duration-200 hover:scale-110 hover:text-foreground"
+              />
+            </div>
           )}
         </motion.div>
       ))}

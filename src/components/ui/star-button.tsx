@@ -83,7 +83,7 @@ export function StarButton({
       }
       ref={pathRef}
       className={cn(
-        "group/star-button relative inline-flex h-10 items-center justify-center gap-2 overflow-hidden rounded-3xl px-4 py-2 text-sm font-medium text-accent-white transition-colors disabled:pointer-events-none disabled:opacity-50",
+        "group/star-button relative inline-flex h-10 items-center justify-center gap-2 overflow-hidden rounded-3xl px-4 py-2 text-sm font-medium text-accent-white transition-colors disabled:pointer-events-none disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-accent-white/50 focus:ring-offset-2 focus:ring-offset-pure-black",
         className,
       )}
       {...props}

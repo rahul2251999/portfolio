@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { ArrowUpRight, Brain, Cloud, Database, Layers, Server, TrendingUp } from 'lucide-react';
+import { ArrowUpRight, Brain, Database, Layers, Server, TrendingUp } from 'lucide-react';
 import { GlowingEffect } from '@/components/ui/glowing-effect';
 
 export function Projects() {
@@ -47,7 +47,7 @@ export function Projects() {
   ];
 
   return (
-    <section className="section py-20 bg-pure-black" id="projects">
+    <section className="section py-24 bg-pure-black" id="projects">
       <div className="container mx-auto px-4">
         <div className="mx-auto mb-12 max-w-4xl px-0 md:px-4 lg:px-6">
           <h2 className="text-left text-lg md:text-4xl font-bold text-accent-white mb-4">
@@ -87,7 +87,7 @@ function ProjectCard({
 }: ProjectCard) {
   return (
     <li className="list-none">
-      <div className="group relative flex h-full flex-col rounded-[1.25rem] border border-border/60 bg-background/40 p-3 backdrop-blur md:rounded-2xl md:p-4">
+      <div className="group relative flex h-full flex-col rounded-[1.25rem] border border-border/60 bg-background/60 p-3 backdrop-blur md:rounded-2xl md:p-4">
         <GlowingEffect
           spread={40}
           glow
@@ -96,7 +96,7 @@ function ProjectCard({
           inactiveZone={0.01}
           borderWidth={3}
         />
-        <div className="relative flex h-full flex-col gap-6 overflow-hidden rounded-xl border border-border/60 bg-background/90 p-6 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:border-accent-white/40 group-hover:bg-background dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)]">
+          <div className="relative flex h-full flex-col gap-6 overflow-hidden rounded-xl border border-border/60 bg-background/80 p-6 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:border-accent-white/40 group-hover:bg-background dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)]">
           <div className="h-24 w-full rounded-lg bg-gradient-to-br from-accent-white/10 via-dark-gray/40 to-transparent ring-1 ring-inset ring-border/30 transition-transform duration-500 group-hover:scale-[1.02]" />
           <div className="relative flex flex-1 flex-col justify-between gap-4">
             <div className="flex items-center gap-3">
@@ -125,7 +125,8 @@ function ProjectCard({
               href={link}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-accent-white transition-colors hover:text-accent-gray"
+              className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-accent-white transition-colors hover:text-accent-gray focus:outline-none focus:ring-2 focus:ring-accent-white/50 focus:ring-offset-2 focus:ring-offset-pure-black rounded-md px-2 py-1"
+              aria-label={`View ${title} repository on GitHub`}
             >
               View Repository
               <ArrowUpRight className="h-4 w-4" />
