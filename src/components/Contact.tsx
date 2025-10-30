@@ -1,4 +1,4 @@
-import { Calendar, Github, Linkedin, Mail, MapPin } from 'lucide-react';
+import { Calendar, Linkedin, Mail } from 'lucide-react';
 
 export function Contact() {
   const contactMethods = [
@@ -7,16 +7,8 @@ export function Contact() {
       title: 'Email',
       description: 'Drop me a line for collaborations or speaking engagements.',
       action: {
-        label: 'rahulpodugu99@gmail.com',
-        href: 'mailto:rahulpodugu99@gmail.com',
-      },
-    },
-    {
-      icon: MapPin,
-      title: 'Location',
-      description: 'Based in Baltimore, MD. Open to remote-first or hybrid roles.',
-      action: {
-        label: 'Baltimore, Maryland, USA',
+        label: 'rahulpodugu2@gmail.com',
+        href: 'mailto:rahulpodugu2@gmail.com',
       },
     },
     {
@@ -26,15 +18,6 @@ export function Contact() {
       action: {
         label: 'linkedin.com/in/rahulpodugu',
         href: 'https://www.linkedin.com/in/rahulpodugu/',
-      },
-    },
-    {
-      icon: Github,
-      title: 'GitHub',
-      description: 'Explore the systems and tooling I’m iterating on.',
-      action: {
-        label: 'github.com/rahul2251999',
-        href: 'https://github.com/rahul2251999',
       },
     },
   ];
@@ -47,102 +30,77 @@ export function Contact() {
             Contact
           </h2>
           <p className="text-left text-accent-gray text-sm md:text-base max-w-2xl">
-            Whether you’re building resilient infrastructure, experimenting with AI-first products, or looking for a systems-minded collaborator—let’s start a conversation.
+            Whether you&apos;re building resilient infrastructure, experimenting with AI-first products, or looking for a systems-minded collaborator—let&apos;s start a conversation.
           </p>
         </div>
 
-        <div className="mx-auto max-w-6xl px-0 md:px-4 lg:px-6">
-          <div className="flex flex-col gap-10 lg:flex-row">
-            <div className="flex-1 space-y-6">
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                {contactMethods.map(({ icon: Icon, title, description, action }) => {
-                  const cardClasses =
-                    "group relative flex h-full flex-col gap-4 rounded-2xl border border-border/60 bg-background/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent-white/40 hover:bg-background/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-pure-black";
+        <div className="mx-auto max-w-5xl px-0 md:px-4 lg:px-6">
+          <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr]">
+            <div className="rounded-3xl border border-border/60 bg-gradient-to-br from-background/70 via-background/60 to-dark-gray/50 p-8 shadow-[0_20px_45px_rgba(10,10,10,0.45)]">
+              <div className="max-w-xl space-y-6">
+                <p className="text-accent-gray text-base leading-relaxed">
+                  Reach out for new product ideas, architecture reviews, or async mentorship. I respond quickly and keep conversations grounded in practical next steps.
+                </p>
+                <ul className="space-y-6">
+                  {contactMethods.map(({ icon: Icon, title, description, action }) => {
+                    const isLink = Boolean(action.href);
+                    const isExternal = action.href?.startsWith('http');
 
-                  const content = (
-                    <>
-                      <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-border/60 bg-dark-gray/60 text-accent-white transition-colors group-hover:border-accent-white/40 group-hover:text-accent-white">
-                        <Icon className="h-5 w-5" />
-                      </div>
-                      <div className="space-y-3">
-                        <h3 className="text-xl font-semibold text-accent-white">{title}</h3>
-                        <p className="text-sm text-accent-gray">{description}</p>
-                        {action.href ? (
-                          <span className="inline-flex items-center text-sm font-medium text-accent-white underline-offset-4 transition-colors group-hover:text-accent-gray group-hover:underline focus:outline-none focus:ring-2 focus:ring-accent-white/50 focus:ring-offset-2 focus:ring-offset-pure-black rounded-md px-1 py-0.5">
-                            {action.label}
-                          </span>
-                        ) : (
-                          <span className="text-sm font-medium text-accent-white/80">{action.label}</span>
-                        )}
-                      </div>
-                    </>
-                  );
-
-                  return action.href ? (
-                    <a
-                      key={title}
-                      href={action.href}
-                      target={action.href.startsWith('http') ? '_blank' : undefined}
-                      rel={action.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      className={cardClasses}
-                      aria-label={`Contact via ${title}: ${action.label}`}
-                      role="button"
-                      tabIndex={0}
-                      onClick={(e) => {
-                        if (action.href?.startsWith('http')) {
-                          try {
-                            // Let the default behavior handle the link
-                          } catch (error) {
-                            console.error(`Failed to open ${title} link:`, error);
-                            e.preventDefault();
-                            alert(`Unable to open ${title}. Please try again or contact me directly.`);
-                          }
-                        }
-                      }}
-                    >
-                      {content}
-                    </a>
-                  ) : (
-                    <div 
-                      key={title} 
-                      className={cardClasses}
-                      role="region"
-                      aria-label={`${title} information`}
-                      tabIndex={0}
-                    >
-                      {content}
-                    </div>
-                  );
-                })}
+                    return (
+                      <li key={title} className="flex items-start gap-4 rounded-2xl border border-border/40 bg-pure-black/40 p-6 transition-all duration-300 hover:border-accent-white/40 hover:bg-pure-black/70">
+                        <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-dark-gray/70 text-accent-white">
+                          <Icon className="h-5 w-5" />
+                        </span>
+                        <div className="space-y-2">
+                          <div>
+                            <h3 className="text-lg font-semibold text-accent-white">{title}</h3>
+                            <p className="text-sm text-accent-gray">{description}</p>
+                          </div>
+                          {isLink ? (
+                            <a
+                              href={action.href}
+                              target={isExternal ? '_blank' : undefined}
+                              rel={isExternal ? 'noopener noreferrer' : undefined}
+                              className="inline-flex items-center text-sm font-medium text-accent-white underline-offset-4 transition-colors hover:text-accent-gray hover:underline focus:outline-none focus:ring-2 focus:ring-accent-white/40 focus:ring-offset-2 focus:ring-offset-pure-black rounded-md px-1 py-0.5"
+                              aria-label={`Contact via ${title}: ${action.label}`}
+                            >
+                              {action.label}
+                            </a>
+                          ) : (
+                            <span className="text-sm font-medium text-accent-white/80">{action.label}</span>
+                          )}
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
             </div>
 
-            <div className="flex-1 rounded-2xl border border-border/60 bg-background/60 p-8 shadow-[0_0_40px_rgba(16,16,16,0.35)]">
-              <div className="mx-auto flex h-full flex-col items-center justify-center gap-6 text-center">
-                <div className="space-y-4">
-                  <h3 className="text-2xl font-semibold text-accent-white">Schedule a working session</h3>
-                  <p className="text-sm text-accent-gray">
-                    Prefer real-time collaboration? Grab a 30-minute slot and we’ll whiteboard, pair program, or ideate on your product roadmap.
-                  </p>
-                </div>
-                <div className="flex flex-col items-center gap-4">
-                  <a
-                    href="https://calendly.com/rahulpodugu2/30min"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-accent-white bg-background/60 border border-border/60 rounded-3xl transition-all duration-300 hover:bg-background/80 hover:border-accent-white/40 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-accent-white/50 focus:ring-offset-2 focus:ring-offset-pure-black"
-                  >
-                    <Calendar className="h-4 w-4 mr-2" />
-                    Book 30 minutes
-                  </a>
-                  <a
-                    href="mailto:rahulpodugu99@gmail.com"
-                    className="inline-block text-sm font-medium text-accent-gray transition-colors hover:text-accent-white hover:underline focus:outline-none focus:ring-2 focus:ring-accent-white/50 focus:ring-offset-2 focus:ring-offset-pure-black rounded-md px-3 py-2 cursor-pointer"
-                    aria-label="Send email to rahulpodugu99@gmail.com"
-                  >
-                    Or send an email instead →
-                  </a>
-                </div>
+            <div className="flex flex-col justify-between rounded-3xl border border-border/60 bg-gradient-to-b from-dark-gray/70 via-background/70 to-background/50 p-8 shadow-[0_25px_55px_rgba(12,12,12,0.4)]">
+              <div className="space-y-4">
+                <h3 className="text-2xl font-semibold text-accent-white">Book time with me</h3>
+                <p className="text-sm text-accent-gray leading-relaxed">
+                  Prefer live collaboration? Reserve a working session and we&apos;ll whiteboard, pair, or explore your roadmap together.
+                </p>
+              </div>
+              <div className="mt-8 space-y-4">
+                <a
+                  href="https://calendly.com/rahulpodugu2/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-accent-white/30 bg-background/70 px-6 py-3 text-base font-medium text-accent-white transition-all duration-300 hover:-translate-y-1 hover:border-accent-white/60 hover:bg-background"
+                >
+                  <Calendar className="h-4 w-4" />
+                  Book a half-hour
+                </a>
+                <a
+                  href="mailto:rahulpodugu2@gmail.com"
+                  className="inline-flex w-full items-center justify-center rounded-2xl border border-transparent bg-transparent px-6 py-3 text-sm font-medium text-accent-gray transition-colors hover:text-accent-white hover:underline focus:outline-none focus:ring-2 focus:ring-accent-white/40 focus:ring-offset-2 focus:ring-offset-pure-black"
+                  aria-label="Send email to rahulpodugu2@gmail.com"
+                >
+                  Or send an email instead →
+                </a>
               </div>
             </div>
           </div>

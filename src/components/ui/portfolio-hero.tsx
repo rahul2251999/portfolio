@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from "react";
+import { Code, Github, Instagram, Linkedin, Twitter } from "lucide-react";
 import profile from "@/assets/image1.png";
 
 interface BlurTextProps {
@@ -72,6 +73,16 @@ const BlurText = ({
 
 export function PortfolioHero() {
   const isDark = true;
+  const socialIcons = useMemo(
+    () => [
+      { Icon: Github, href: "https://github.com/rahul2251999", label: "GitHub profile" },
+      { Icon: Linkedin, href: "https://www.linkedin.com/in/rahulpodugu/", label: "LinkedIn profile" },
+      { Icon: Instagram, href: "https://www.instagram.com/rahul_podugu/", label: "Instagram profile" },
+      { Icon: Twitter, href: "https://x.com/rahulku67492929", label: "X profile" },
+      { Icon: Code, href: "https://leetcode.com/u/rahulpodugu2/", label: "LeetCode profile" },
+    ],
+    [],
+  );
 
   useEffect(() => {
     document.documentElement.classList.add("dark");
@@ -87,7 +98,7 @@ export function PortfolioHero() {
       }}
     >
       <main className="relative flex min-h-screen flex-col">
-        <div className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 px-4">
+        <div className="pointer-events-none absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 px-4">
           <div className="relative text-center">
             <BlurText
               text="RAHUL"
@@ -112,16 +123,32 @@ export function PortfolioHero() {
           </div>
         </div>
 
-        <div className="absolute left-1/2 bottom-16 w-full -translate-x-1/2 px-6 sm:bottom-20 md:bottom-24 lg:bottom-32 xl:bottom-36">
-          <div className="flex justify-center">
-            <BlurText
-              text="Software Engineer."
-              delay={150}
-              animateBy="words"
-              direction="top"
-              className="text-center text-[15px] text-neutral-400 transition-colors duration-300 hover:text-white sm:text-[18px] md:text-[20px] lg:text-[22px]"
-              style={{ fontFamily: "'Antic', sans-serif" }}
-            />
+        <div className="absolute left-1/2 bottom-4 z-20 w-full -translate-x-1/2 px-6 sm:bottom-8 md:bottom-12 lg:bottom-16 xl:bottom-20">
+          <div className="flex flex-col items-center gap-6">
+            <div className="flex justify-center">
+              <BlurText
+                text="Building Reliable Backend Systems."
+                delay={150}
+                animateBy="words"
+                direction="top"
+                className="text-center text-[15px] text-neutral-400 transition-colors duration-300 hover:text-white sm:text-[18px] md:text-[20px] lg:text-[22px]"
+                style={{ fontFamily: "'Antic', sans-serif" }}
+              />
+            </div>
+            <div className="flex flex-wrap justify-center gap-3">
+              {socialIcons.map(({ Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex h-11 w-11 items-center justify-center rounded-xl border border-border/60 bg-black/60 text-neutral-300 transition-all duration-200 hover:-translate-y-1 hover:border-white/60 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ring-offset-black"
+                >
+                  <Icon size={18} />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </main>

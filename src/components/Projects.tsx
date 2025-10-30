@@ -1,55 +1,47 @@
 import type { ReactNode } from 'react';
-import { ArrowUpRight, Brain, Database, Layers, Server, TrendingUp } from 'lucide-react';
+import { ArrowUpRight, Brain, Database, Server, TrendingUp } from 'lucide-react';
 import { GlowingEffect } from '@/components/ui/glowing-effect';
 
 export function Projects() {
   const projects: ProjectCard[] = [
     {
       title: "Decentralized File Sharing System",
-      description: "P2P file sharing application with RSA/AES encryption and DHT indexing using Java and Linux io_uring. Implemented multithreaded architecture achieving 3x faster access times.",
+      description: "I crafted a peer to peer file sharing network that pairs RSA and AES encryption with a distributed hash table so neighbors can discover each other quickly. The multithreaded pipeline keeps transfers nimble even when peers churn.",
       icon: <Server className="w-4 h-4 text-blue-500" />,
-      tags: ["Java", "P2P", "Encryption"],
-      highlight: "Distributed systems, encryption, low latency file access",
-      link: "https://github.com/rahul2251999"
+      tags: ["Java", "Peer to Peer", "Encryption"],
+      highlight: "Distributed storytelling about trust, speed, and resilience",
+      link: "https://github.com/rahul2251999/Peer-to-Peer-Secured-File-System"
     },
     {
       title: "Real-Time Stock Trading Engine",
-      description: "High-performance matching engine using lock-free concurrency with Compare-And-Swap (CAS) operations. Achieved sub-millisecond latency for processing 1,000+ stock tickers.",
+      description: "A trading engine shaped around lock-free concurrency and compare-and-swap loops, built to match orders in split-second markets without letting latency steal the spotlight.",
       icon: <TrendingUp className="w-4 h-4 text-emerald-500" />,
       tags: ["Java", "CAS", "Trading"],
-      highlight: "Lock-free concurrency, real-time market data ingestion",
-      link: "https://github.com/rahul2251999"
+      highlight: "Concurrency that keeps market streams steady",
+      link: "https://github.com/rahul2251999/stock-trading-engine"
     },
     {
       title: "AI Customer Support Chatbot",
-      description: "Intelligent customer support system with Azure Bot Services, LUIS, and custom NLP stack. Handles 1,000+ queries daily with 60% improved resolution rate.",
+      description: "An AI assistant that blends LangChain, Azure Bot Services, and custom natural language pipelines so on-call engineers can surface answers inside incident heat without sifting through endless runbooks.",
       icon: <Brain className="w-4 h-4 text-purple-500" />,
       tags: ["AI", "NLP", "Azure"],
-      highlight: "Conversational AI, real-time analytics, scalable architecture",
-      link: "https://github.com/rahul2251999"
-    },
-    {
-      title: "Microservices E-commerce",
-      description: "Scalable e-commerce platform using microservices architecture with Spring Boot backend and React frontend, containerized with Docker.",
-      icon: <Layers className="w-4 h-4 text-red-500" />,
-      tags: ["Spring Boot", "React", "Docker"],
-      highlight: "Saga orchestration, resilient payments, shared UI library",
-      link: "https://github.com/rahul2251999"
+      highlight: "Conversational systems grounded in context and empathy",
+      link: "https://github.com/rahul2251999/AI-Powered-Customer-Support-Chatbot"
     },
     {
       title: "Distributed Cache System",
-      description: "Distributed caching system using Redis with consistent hashing algorithm for high availability and fault tolerance across multiple nodes.",
+      description: "A distributed cache stitched together with Redis and consistent hashing so applications stay responsive even as nodes ebb and flow across the cluster.",
       icon: <Database className="w-4 h-4 text-cyan-500" />,
       tags: ["Redis", "Distributed", "Cache"],
-      highlight: "Clustered caching, consistent hashing, zero-downtime deploys",
-      link: "https://github.com/rahul2251999"
+      highlight: "Clustered caching that embraces graceful failover",
+      link: "https://github.com/rahul2251999/Distributed-Cache-System"
     }
   ];
 
   return (
     <section className="section py-24 bg-pure-black" id="projects">
       <div className="container mx-auto px-4">
-        <div className="mx-auto mb-12 max-w-4xl px-0 md:px-4 lg:px-6">
+        <div className="mb-12 max-w-4xl px-0 md:px-4 lg:px-6">
           <h2 className="text-left text-lg md:text-4xl font-bold text-accent-white mb-4">
             Projects
           </h2>

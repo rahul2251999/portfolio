@@ -1,14 +1,27 @@
-import { Github, Instagram, Linkedin, Twitter, Code } from 'lucide-react';
-import { AnimatedSocialIcons } from './ui/floating-action-button';
+import { useCallback, useState } from 'react';
+
+import { AnimatedDownload } from './ui/animated-download';
+import { Button } from './ui/button';
 
 export function About() {
-  const socialIcons = [
-    { Icon: Github, href: 'https://github.com/rahul2251999', label: 'GitHub profile' },
-    { Icon: Linkedin, href: 'https://www.linkedin.com/in/rahulpodugu/', label: 'LinkedIn profile' },
-    { Icon: Instagram, href: 'https://www.instagram.com/rahul_podugu/', label: 'Instagram profile' },
-    { Icon: Twitter, href: 'https://x.com/rahulku67492929', label: 'X profile' },
-    { Icon: Code, href: 'https://leetcode.com/u/rahulpodugu2/', label: 'LeetCode profile' },
-  ];
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  const handleStartDownload = useCallback(() => {
+    if (isDownloading) return;
+    setIsDownloading(true);
+  }, [isDownloading]);
+
+  const handleAnimationComplete = useCallback(() => {
+    setIsDownloading(false);
+    const resumeUrl = 'Resume.pdf';
+    const anchor = document.createElement('a');
+    anchor.href = resumeUrl;
+    anchor.download = 'Rahul_Podugu_Resume.pdf';
+    anchor.target = '_blank';
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+  }, []);
 
   return (
     <section className="section py-24 bg-pure-black" id="about">
@@ -23,40 +36,43 @@ export function About() {
         <div className="mx-auto max-w-4xl px-0 md:px-4 lg:px-6">
           <div className="space-y-6 text-accent-gray leading-relaxed">
             <p>
-              From a young age, I was always fascinated by how things work—taking apart gadgets, exploring new technologies, and solving puzzles. This curiosity naturally led me to the world of software engineering, where every challenge is a new puzzle waiting to be solved.
+              This portfolio is the map of a builder who chases quiet confidence. I am drawn to messy systems, not for the chaos, but for the chance to trace the signal inside the noise and leave teams with something sturdier than before.
             </p>
             <p>
-              My journey began in India, where I built a strong foundation in computer science. As I moved to the United States for my master's at UMBC, I dove deeper into distributed systems, cloud computing, and AI. Along the way, I discovered my passion for building scalable, robust solutions that make a real impact—whether it's architecting payment microservices that handle thousands of transactions or developing AI-powered chatbots that help users in real time.
+              I grew up in India sketching circuits in notebooks and searching for patterns in every puzzle I could find. Graduate study at UMBC pulled that curiosity into distributed systems, cloud primitives, and applied machine intelligence. Each project here is a chapter from that move across continents, disciplines, and perspectives.
             </p>
             <p>
-              I thrive in collaborative environments, leading teams through Agile sprints and mentoring others, always striving to learn and grow. For me, technology is not just about code—it's about creating experiences that are intuitive, efficient, and meaningful.
+              Today, at Aztra, I steward payment and analytics platforms that run around the clock. The work blends patient systems thinking with collaborative rituals—pairing with product partners, mentoring teammates, and stringing together architectures that keep trust intact even under stress.
             </p>
             <p>
-              Outside of work, I love sharing knowledge, contributing to open-source projects, and staying on the cutting edge of tech trends. My story is still being written, and I'm excited for the next chapter—solving bigger problems and building the future, one line of code at a time.
+              Away from delivery sprints, I write, share what I learn, and keep experimenting with open source ideas that stretch my point of view. The story is still being written, and I am always searching for the next frontier where thoughtful engineering can create calm for the people who rely on it.
             </p>
-            <div className="pt-4">
-              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
-                <a
-                  href="Resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  download="Rahul_Podugu_Resume.pdf"
-                  className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-accent-white bg-background/60 border border-border/60 rounded-3xl transition-all duration-300 hover:bg-background/80 hover:border-accent-white/40 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-accent-white/50 focus:ring-offset-2 focus:ring-offset-pure-black"
-                >
-                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  Resume
-                </a>
-                <div>
-                  <AnimatedSocialIcons
-                    icons={socialIcons}
-                    iconSize={18}
-                    className="sm:justify-start"
-                  />
-                </div>
-              </div>
+          </div>
+
+          <div className="mt-10 space-y-5 rounded-2xl border border-border/60 bg-background/40 p-6">
+            <div className="space-y-3">
+              <h3 className="text-sm font-semibold uppercase tracking-[0.35em] text-accent-gray">Resume</h3>
+              <p className="text-sm text-accent-gray">
+                Launch the download to grab a fresh PDF after a quick systems-style status animation.
+              </p>
             </div>
+            <Button
+              onClick={handleStartDownload}
+              disabled={isDownloading}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-border/60 bg-background/70 px-5 py-3 text-sm font-medium text-accent-white transition-all duration-300 hover:-translate-y-1 hover:bg-background hover:border-accent-white/40 focus:outline-none focus:ring-2 focus:ring-accent-white/50 focus:ring-offset-2 focus:ring-offset-pure-black"
+              variant="outline"
+            >
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              {isDownloading ? 'Preparing download...' : 'Download Resume'}
+            </Button>
+            <AnimatedDownload
+              className="w-full"
+              width="100%"
+              isAnimating={isDownloading}
+              onAnimationComplete={handleAnimationComplete}
+            />
           </div>
         </div>
       </div>

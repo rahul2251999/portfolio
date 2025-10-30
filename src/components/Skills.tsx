@@ -49,7 +49,7 @@ const skillsTimeline = [
     relatedIds: [2, 5],
     status: 'completed' as const,
     energy: 90,
-    skills: ['AWS (EC2, S3, Lambda)', 'Docker', 'Kubernetes', 'Jenkins', 'GitLab CI'],
+    skills: ['AWS compute, storage, and serverless tooling', 'Docker', 'Kubernetes', 'Jenkins', 'GitLab CI'],
   },
   {
     id: 4,
