@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 
 import { AnimatedDownload } from './ui/animated-download';
 import { Button } from './ui/button';
-import ReadingTextReveal from './ui/reading-text-reveal';
+import { ReadingTextReveal } from './ui/reading-text-reveal';
 
 export function About() {
   const [isDownloading, setIsDownloading] = useState(false);
@@ -42,7 +42,7 @@ export function About() {
     };
 
     const buildResumeUrls = () => {
-      const rawBase = import.meta.env.BASE_URL ?? '/';
+      const rawBase = (import.meta.env?.BASE_URL ?? '/') as string;
       const withLeadingSlash = rawBase.startsWith('/') ? rawBase : `/${rawBase}`;
       const normalizedBase = withLeadingSlash.endsWith('/') ? withLeadingSlash : `${withLeadingSlash}/`;
       const relativeUrl = `${normalizedBase}Resume.pdf`;
