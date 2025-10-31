@@ -1,6 +1,24 @@
 import { useState, useEffect, useRef, useMemo } from "react";
-import { Code, Github, Instagram, Linkedin, Twitter } from "lucide-react";
+import { Code, Github, Instagram, Linkedin } from "lucide-react";
 import profile from "@/assets/image1.png";
+
+// Custom X Logo Component matching X branding
+const XLogo = ({ size = 18, className = "" }: { size?: number; className?: string }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    aria-label="X logo"
+  >
+    <path
+      d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+      fill="currentColor"
+    />
+  </svg>
+);
 
 interface BlurTextProps {
   text: string;
@@ -75,11 +93,11 @@ export function PortfolioHero() {
   const isDark = true;
   const socialIcons = useMemo(
     () => [
-      { Icon: Linkedin, href: "https://www.linkedin.com/in/rahulpodugu", label: "LinkedIn profile" },
-      { Icon: Github, href: "https://github.com/Rahul2251999", label: "GitHub profile" },
-      { Icon: Twitter, href: "http://x.com/rahulku67492929", label: "X profile" },
-      { Icon: Instagram, href: "https://www.instagram.com/rahul_podugu/", label: "Instagram profile" },
-      { Icon: Code, href: "https://leetcode.com/u/rahulpodugu2/", label: "LeetCode profile" },
+      { Icon: Linkedin, href: "https://www.linkedin.com/in/rahulpodugu", label: "LinkedIn profile", isX: false },
+      { Icon: Github, href: "https://github.com/Rahul2251999", label: "GitHub profile", isX: false },
+      { Icon: null, href: "http://x.com/rahulku67492929", label: "X profile", isX: true },
+      { Icon: Instagram, href: "https://www.instagram.com/rahul_podugu/", label: "Instagram profile", isX: false },
+      { Icon: Code, href: "https://leetcode.com/u/rahulpodugu2/", label: "LeetCode profile", isX: false },
     ],
     [],
   );
@@ -136,7 +154,7 @@ export function PortfolioHero() {
               />
             </div>
             <div className="flex flex-wrap justify-center gap-3 relative z-30">
-              {socialIcons.map(({ Icon, href, label }) => (
+              {socialIcons.map(({ Icon, href, label, isX }) => (
                 <a
                   key={label}
                   href={href}
@@ -145,7 +163,11 @@ export function PortfolioHero() {
                   aria-label={label}
                   className="relative z-30 pointer-events-auto flex h-11 w-11 items-center justify-center rounded-xl border border-border/60 bg-black/60 text-neutral-300 transition-all duration-200 hover:-translate-y-1 hover:border-white/60 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ring-offset-black cursor-pointer"
                 >
-                  <Icon size={18} />
+                  {isX ? (
+                    <XLogo size={18} className="text-current" />
+                  ) : (
+                    Icon && <Icon size={18} />
+                  )}
                 </a>
               ))}
             </div>
