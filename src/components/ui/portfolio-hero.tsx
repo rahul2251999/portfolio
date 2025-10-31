@@ -75,10 +75,10 @@ export function PortfolioHero() {
   const isDark = true;
   const socialIcons = useMemo(
     () => [
-      { Icon: Github, href: "https://github.com/rahul2251999", label: "GitHub profile" },
-      { Icon: Linkedin, href: "https://www.linkedin.com/in/rahulpodugu/", label: "LinkedIn profile" },
+      { Icon: Linkedin, href: "https://www.linkedin.com/in/rahulpodugu", label: "LinkedIn profile" },
+      { Icon: Github, href: "https://github.com/Rahul2251999", label: "GitHub profile" },
+      { Icon: Twitter, href: "http://x.com/rahulku67492929", label: "X profile" },
       { Icon: Instagram, href: "https://www.instagram.com/rahul_podugu/", label: "Instagram profile" },
-      { Icon: Twitter, href: "https://x.com/rahulku67492929", label: "X profile" },
       { Icon: Code, href: "https://leetcode.com/u/rahulpodugu2/", label: "LeetCode profile" },
     ],
     [],
@@ -135,7 +135,7 @@ export function PortfolioHero() {
                 style={{ fontFamily: "'Antic', sans-serif" }}
               />
             </div>
-            <div className="flex flex-wrap justify-center gap-3">
+            <div className="flex flex-wrap justify-center gap-3 relative z-30">
               {socialIcons.map(({ Icon, href, label }) => (
                 <a
                   key={label}
@@ -143,7 +143,7 @@ export function PortfolioHero() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex h-11 w-11 items-center justify-center rounded-xl border border-border/60 bg-black/60 text-neutral-300 transition-all duration-200 hover:-translate-y-1 hover:border-white/60 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ring-offset-black"
+                  className="relative z-30 pointer-events-auto flex h-11 w-11 items-center justify-center rounded-xl border border-border/60 bg-black/60 text-neutral-300 transition-all duration-200 hover:-translate-y-1 hover:border-white/60 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ring-offset-black cursor-pointer"
                 >
                   <Icon size={18} />
                 </a>

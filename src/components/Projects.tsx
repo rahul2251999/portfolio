@@ -41,12 +41,13 @@ export function Projects() {
   return (
     <section className="section py-24 bg-pure-black" id="projects">
       <div className="container mx-auto px-4">
-        <div className="mb-12 max-w-4xl px-0 md:px-4 lg:px-6">
-          <h2 className="text-left text-lg md:text-4xl font-bold text-accent-white mb-4">
-            Projects
+        <div className="mb-12 max-w-4xl">
+          <span className="text-sm uppercase tracking-[0.4em] text-accent-gray">Recent Builds</span>
+          <h2 className="mt-4 text-4xl font-bold text-accent-white sm:text-5xl">
+            Systems I&apos;m excited to have shipped
           </h2>
-          <p className="text-left text-accent-gray text-sm md:text-base max-w-2xl">
-            A sampling of systems I&apos;ve shipped—from distributed infrastructure to AI-driven experiences.
+          <p className="mt-4 text-accent-gray text-sm md:text-base max-w-2xl">
+            Distributed rails, real-time engines, and AI copilots that keep teams calm when the load spikes.
           </p>
         </div>
         
@@ -88,7 +89,7 @@ function ProjectCard({
           inactiveZone={0.01}
           borderWidth={3}
         />
-          <div className="relative flex h-full flex-col gap-6 overflow-hidden rounded-xl border border-border/60 bg-background/80 p-6 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:border-accent-white/40 group-hover:bg-background dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)]">
+          <div className="relative z-10 flex h-full flex-col gap-6 overflow-hidden rounded-xl border border-border/60 bg-background/80 p-6 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:border-accent-white/40 group-hover:bg-background dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)]">
           <div className="h-24 w-full rounded-lg bg-gradient-to-br from-accent-white/10 via-dark-gray/40 to-transparent ring-1 ring-inset ring-border/30 transition-transform duration-500 group-hover:scale-[1.02]" />
           <div className="relative flex flex-1 flex-col justify-between gap-4">
             <div className="flex items-center gap-3">
@@ -117,7 +118,7 @@ function ProjectCard({
               href={link}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-accent-white transition-colors hover:text-accent-gray focus:outline-none focus:ring-2 focus:ring-accent-white/50 focus:ring-offset-2 focus:ring-offset-pure-black rounded-md px-2 py-1"
+              className="relative z-10 pointer-events-auto mt-2 inline-flex items-center gap-2 text-sm font-semibold text-accent-white transition-colors hover:text-accent-gray focus:outline-none focus:ring-2 focus:ring-accent-white/50 focus:ring-offset-2 focus:ring-offset-pure-black rounded-md px-2 py-1 cursor-pointer"
               aria-label={`View ${title} repository on GitHub`}
             >
               View Repository

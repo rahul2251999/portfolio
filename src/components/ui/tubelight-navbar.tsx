@@ -45,11 +45,11 @@ export function NavBar({ items, className }: NavBarProps) {
   return (
     <div
       className={cn(
-        "fixed bottom-0 sm:top-0 left-1/2 -translate-x-1/2 z-50 mb-6 sm:pt-6",
+        "fixed bottom-0 sm:bottom-auto sm:top-0 left-1/2 -translate-x-1/2 z-50 mb-6 sm:pt-6",
         className,
       )}
     >
-      <div className="flex items-center gap-3 bg-pure-black/80 border border-border/60 backdrop-blur-lg py-1 px-1 rounded-full shadow-lg">
+      <div className="relative z-50 flex items-center gap-3 bg-pure-black/80 border border-border/60 backdrop-blur-lg py-1 px-1 rounded-full shadow-lg">
         {items.map((item) => {
           const Icon = item.icon
           const isActive = activeTab === item.name
@@ -58,9 +58,16 @@ export function NavBar({ items, className }: NavBarProps) {
             <a
               key={item.name}
               href={item.url}
-              onClick={() => setActiveTab(item.name)}
+              onClick={(e) => {
+                e.preventDefault();
+                setActiveTab(item.name);
+                const element = document.querySelector(item.url);
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
               className={cn(
-                "relative cursor-pointer text-sm font-semibold px-6 py-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-accent-white/50 focus:ring-offset-2 focus:ring-offset-pure-black",
+                "relative z-50 pointer-events-auto cursor-pointer text-sm font-semibold px-6 py-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-accent-white/50 focus:ring-offset-2 focus:ring-offset-pure-black",
                 "text-accent-gray hover:text-accent-white",
                 isActive && "bg-background/60 text-accent-white",
               )}
