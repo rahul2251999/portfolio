@@ -22,7 +22,18 @@ export function Contact() {
     <section className="section border-t border-dark-gray/60 bg-pure-black py-24" id="contact">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl space-y-4">
-          <span className="text-sm uppercase tracking-[0.4em] text-accent-gray">Let&apos;s build together</span>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="flex-1">
+              <span className="text-sm uppercase tracking-[0.4em] text-accent-gray">Let&apos;s build together</span>
+            </div>
+            <div className="h-7 rounded-full bg-background/60 px-3 text-xs border border-border/60 flex items-center gap-2">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span>Available for opportunities</span>
+            </div>
+          </div>
           <h2 className="text-4xl font-bold text-accent-white sm:text-5xl">
             I&apos;m actively looking for opportunities and collaborations
           </h2>

@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { useState } from 'react';
 import { ArrowUpRight, Brain, Database, Server, TrendingUp } from 'lucide-react';
 import { GlowingEffect } from '@/components/ui/glowing-effect';
 
@@ -13,12 +14,12 @@ export function Projects() {
       link: "https://github.com/rahul2251999/Peer-to-Peer-Secured-File-System"
     },
     {
-      title: "Real-Time Stock Trading Engine",
-      description: "A trading engine shaped around lock-free concurrency and compare-and-swap loops, built to match orders in split-second markets without letting latency steal the spotlight.",
-      icon: <TrendingUp className="w-4 h-4 text-emerald-500" />,
-      tags: ["Java", "CAS", "Trading"],
-      highlight: "Concurrency that keeps market streams steady",
-      link: "https://github.com/rahul2251999/stock-trading-engine"
+      title: "FinSight AI",
+      description: "Architected an end-to-end RAG system on AWS (FastAPI, LlamaIndex, OpenSearch Serverless, S3) to deliver semantic retrieval across payment regulations, KYC/AML policies, and fraud playbooks. Fine-tuned and deployed an open-source LLaMA model with QLoRA on Amazon SageMaker for scalable inference, improving answer consistency and reducing hallucinations by 35%. Developed a transaction-aware risk engine that fuses RAG outputs with DynamoDB-backed merchant and anomaly data to surface real-time risk scores and remediation insights, running on ECS Fargate with CI/CD and CloudWatch monitoring.",
+      icon: <Brain className="w-4 h-4 text-purple-500" />,
+      tags: ["AWS", "RAG", "LLM", "SageMaker"],
+      highlight: "AWS-native fintech RAG platform with real-time risk intelligence",
+      link: "https://github.com/rahul2251999/FinSight-AI"
     },
     {
       title: "AI Customer Support Chatbot",
@@ -78,6 +79,13 @@ function ProjectCard({
   link,
   highlight,
 }: ProjectCard) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const MAX_LENGTH = 150;
+  const shouldTruncate = description.length > MAX_LENGTH;
+  const displayText = isExpanded || !shouldTruncate 
+    ? description 
+    : description.slice(0, MAX_LENGTH) + '...';
+
   return (
     <li className="list-none">
       <div className="group relative flex h-full flex-col rounded-[1.25rem] border border-border/60 bg-background/60 p-3 backdrop-blur md:rounded-2xl md:p-4">
@@ -100,7 +108,17 @@ function ProjectCard({
                 {title}
               </h3>
             </div>
-            <p className="text-sm text-accent-gray md:text-base">{description}</p>
+            <div>
+              <p className="text-sm text-accent-gray md:text-base">{displayText}</p>
+              {shouldTruncate && (
+                <button
+                  onClick={() => setIsExpanded(!isExpanded)}
+                  className="mt-2 text-xs font-medium text-accent-white hover:text-accent-gray transition-colors duration-200"
+                >
+                  {isExpanded ? 'Read less' : 'Read more'}
+                </button>
+              )}
+            </div>
             <div className="rounded-lg border border-border/60 bg-dark-gray/40 px-4 py-2 text-xs font-medium uppercase tracking-widest text-accent-gray">
               {highlight}
             </div>

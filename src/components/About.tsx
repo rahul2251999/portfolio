@@ -3,6 +3,7 @@ import { useCallback, useState } from 'react';
 import { AnimatedDownload } from './ui/animated-download';
 import { Button } from './ui/button';
 import { ReadingTextReveal } from './ui/reading-text-reveal';
+import HyperTextParagraph from './ui/hyper-text-with-decryption';
 
 export function About() {
   const [isDownloading, setIsDownloading] = useState(false);
@@ -41,53 +42,22 @@ export function About() {
       }
     };
 
-    const buildResumeUrls = () => {
-      const rawBase = (import.meta.env?.BASE_URL ?? '/') as string;
-      const withLeadingSlash = rawBase.startsWith('/') ? rawBase : `/${rawBase}`;
-      const normalizedBase = withLeadingSlash.endsWith('/') ? withLeadingSlash : `${withLeadingSlash}/`;
-      const relativeUrl = `${normalizedBase}Resume.pdf`;
+    // Simple direct reference to Resume.pdf in public folder
+    const resumeUrl = '/Resume.pdf';
+    
+    // Try to download from public folder
+    const ok = await tryDownload(resumeUrl);
+    if (ok) return;
 
-      if (typeof window === 'undefined') {
-        return { absoluteUrl: null, relativeUrl, fallbackRelative: 'Resume.pdf' };
-      }
-
-      const origin = window.location.origin;
-      const absoluteUrl = origin && origin !== 'null' ? `${origin}${relativeUrl}` : null;
-      const fallbackRelative = relativeUrl.startsWith('/') ? relativeUrl.slice(1) : relativeUrl;
-
-      return { absoluteUrl, relativeUrl, fallbackRelative };
-    };
-
-    const { absoluteUrl, relativeUrl, fallbackRelative } = buildResumeUrls();
-
-    const candidates = Array.from(
-      new Set(
-        [
-          absoluteUrl,
-          relativeUrl,
-          fallbackRelative,
-          '/Resume.pdf',
-          'Resume.pdf',
-        ].filter(Boolean),
-      ),
-    ) as string[];
-
-    for (const url of candidates) {
-      // eslint-disable-next-line no-await-in-loop
-      const ok = await tryDownload(url);
-      if (ok) return;
-    }
-
-    // Fallback: open in new tab (lets browser try to resolve)
-    const fallbackUrl = candidates[0] ?? 'Resume.pdf';
+    // Fallback: open in new tab
     if (typeof window !== 'undefined') {
       try {
-        const popup = window.open(fallbackUrl, '_blank', 'noopener');
+        const popup = window.open(resumeUrl, '_blank', 'noopener');
         if (!popup) {
-          window.location.href = fallbackUrl;
+          window.location.href = resumeUrl;
         }
       } catch {
-        window.location.href = fallbackUrl;
+        window.location.href = resumeUrl;
       }
     }
   }, []);
@@ -100,22 +70,74 @@ export function About() {
           <h2 className="mt-4 text-4xl font-bold text-accent-white sm:text-5xl">
             How I build calm in complex systems
           </h2>
-          <p className="mt-4 max-w-2xl text-accent-gray text-sm md:text-base">
-            Systems engineer, strategist, and teammate focused on making backend platforms feel reliable, no matter how much chaos is happening behind the curtain.
-          </p>
+          <div className="mt-4 max-w-2xl">
+            <HyperTextParagraph
+              text="Systems engineer, strategist, and teammate focused on making backend platforms feel reliable, no matter how much chaos is happening behind the curtain."
+              highlightWords={["systems", "engineer", "backend", "platforms", "reliable"]}
+              className="text-accent-gray text-xs md:text-sm"
+            />
+          </div>
         </div>
 
         <div className="mx-auto max-w-4xl px-0 md:px-4 lg:px-6">
-          <ReadingTextReveal
-            segments={aboutSegments}
-            className="bg-transparent"
-            contentClassName="px-0 md:px-0 lg:px-0 pt-2 pb-2"
-            textClassName="text-base md:text-lg leading-relaxed text-accent-gray font-normal"
-            paragraphSpacingClassName="space-y-6"
-            minHeight="60vh"
-            showFooter={false}
-            bottomSpacerHeight="0"
-          />
+          <div className="space-y-6">
+            {aboutSegments.map((segment, index) => {
+              // First segment gets the hyper-text treatment with key technical terms
+              if (index === 0) {
+                return (
+                  <div key={index} className="pt-2 pb-2">
+                    <HyperTextParagraph
+                      text={segment}
+                      highlightWords={["builder", "systems", "signal", "noise", "teams"]}
+                      className="text-sm md:text-base leading-relaxed text-accent-gray font-normal"
+                    />
+                  </div>
+                );
+              }
+              // Second segment highlights location and technical terms
+              if (index === 1) {
+                return (
+                  <div key={index} className="pt-2 pb-2">
+                    <HyperTextParagraph
+                      text={segment}
+                      highlightWords={["India", "UMBC", "distributed", "systems", "cloud", "machine", "intelligence"]}
+                      className="text-sm md:text-base leading-relaxed text-accent-gray font-normal"
+                    />
+                  </div>
+                );
+              }
+              // Third segment highlights company and work terms
+              if (index === 2) {
+                return (
+                  <div key={index} className="pt-2 pb-2">
+                    <HyperTextParagraph
+                      text={segment}
+                      highlightWords={["Aztra", "payment", "analytics", "platforms", "systems", "thinking", "architectures"]}
+                      className="text-sm md:text-base leading-relaxed text-accent-gray font-normal"
+                    />
+                  </div>
+                );
+              }
+              // Fourth segment highlights activities
+              if (index === 3) {
+                return (
+                  <div key={index} className="pt-2 pb-2">
+                    <HyperTextParagraph
+                      text={segment}
+                      highlightWords={["write", "open", "source", "engineering", "frontier"]}
+                      className="text-sm md:text-base leading-relaxed text-accent-gray font-normal"
+                    />
+                  </div>
+                );
+              }
+              // Fallback to regular text
+              return (
+                <p key={index} className="text-sm md:text-base leading-relaxed text-accent-gray font-normal pt-2 pb-2">
+                  {segment}
+                </p>
+              );
+            })}
+          </div>
 
           <div className="mt-8 w-full max-w-xl space-y-5 rounded-2xl border border-border/60 bg-background/40 p-5 sm:p-6">
             <div className="space-y-3">

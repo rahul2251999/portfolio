@@ -4,7 +4,7 @@ import { About } from './components/About';
 import { Experience } from './components/Experience';
 import { Projects } from './components/Projects';
 import { Skills } from './components/Skills';
-import { Contact } from './components/Contact';
+import { LetsWorkTogether } from './components/ui/lets-work-section';
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
       <Experience />
       <Projects />
       <Skills />
-      <Contact />
+      <LetsWorkTogether />
     </div>
   );
 }
