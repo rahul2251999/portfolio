@@ -2,7 +2,6 @@ import { useCallback, useState } from 'react';
 
 import { AnimatedDownload } from './ui/animated-download';
 import { Button } from './ui/button';
-import { ReadingTextReveal } from './ui/reading-text-reveal';
 import HyperTextParagraph from './ui/hyper-text-with-decryption';
 
 export function About() {

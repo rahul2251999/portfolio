@@ -30,7 +30,7 @@ const Word = ({
 }: WordProps) => {
   const [displayText, setDisplayText] = useState(children);
   const [isHovered, setIsHovered] = useState(false);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // Cleanup on unmount
   useEffect(() => {

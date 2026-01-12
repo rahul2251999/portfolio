@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { useState } from 'react';
-import { ArrowUpRight, Brain, Database, Server, TrendingUp } from 'lucide-react';
+import { ArrowUpRight, Brain, Database, Server } from 'lucide-react';
 import { GlowingEffect } from '@/components/ui/glowing-effect';
 
 export function Projects() {
