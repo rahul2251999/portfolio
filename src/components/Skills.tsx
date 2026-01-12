@@ -1,4 +1,4 @@
-import { Brain, Cloud, Code2, Database, Network } from 'lucide-react';
+import { Brain, Cloud, Code2, Database, Network, Layers } from 'lucide-react';
 import RadialOrbitalTimeline from '@/components/ui/radial-orbital-timeline';
 
 const skillsTimeline = [
@@ -22,7 +22,7 @@ const skillsTimeline = [
     content:
       'Deliver resilient services and delightful front-ends using proven frameworks, messaging backbones, and modern API paradigms.',
     category: 'Frameworks',
-    icon: Brain,
+    icon: Layers,
     relatedIds: [1, 3, 5],
     status: 'completed' as const,
     energy: 92,
@@ -72,7 +72,7 @@ const skillsTimeline = [
       'Lead cross-functional delivery with deep systems knowledge, observability, and collaboration practices that keep teams shipping.',
     category: 'Systems',
     icon: Network,
-    relatedIds: [1, 2, 3],
+    relatedIds: [1, 2, 3, 6],
     status: 'completed' as const,
     energy: 93,
     skills: [
@@ -86,6 +86,29 @@ const skillsTimeline = [
       'Prometheus',
       'Grafana',
       'ELK Stack',
+    ],
+  },
+  {
+    id: 6,
+    title: 'AI & Machine Learning',
+    date: 'Intelligent Systems',
+    content:
+      'Build production-ready AI applications with RAG systems, LLM fine-tuning, and semantic search to deliver intelligent, context-aware experiences.',
+    category: 'AI/ML',
+    icon: Brain,
+    relatedIds: [1, 2, 3],
+    status: 'completed' as const,
+    energy: 90,
+    skills: [
+      'LLMs',
+      'RAG',
+      'LangChain',
+      'LlamaIndex',
+      'SageMaker',
+      'Fine-tuning',
+      'Vector Search',
+      'OpenSearch',
+      'NLP',
     ],
   },
 ];

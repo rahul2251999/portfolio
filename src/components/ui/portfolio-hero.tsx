@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { Code, Github, Instagram, Linkedin } from "lucide-react";
 import profile from "@/assets/image1.png";
+import FancyButton from "@/components/ui/shiny-button";
 
 // Custom X Logo Component matching X branding
 const XLogo = ({ size = 18, className = "" }: { size?: number; className?: string }) => (
@@ -93,11 +94,11 @@ export function PortfolioHero() {
   const isDark = true;
   const socialIcons = useMemo(
     () => [
-      { Icon: Linkedin, href: "https://www.linkedin.com/in/rahulpodugu", label: "LinkedIn profile", isX: false },
-      { Icon: Github, href: "https://github.com/Rahul2251999", label: "GitHub profile", isX: false },
-      { Icon: null, href: "http://x.com/rahulku67492929", label: "X profile", isX: true },
-      { Icon: Instagram, href: "https://www.instagram.com/rahul_podugu/", label: "Instagram profile", isX: false },
-      { Icon: Code, href: "https://leetcode.com/u/rahulpodugu2/", label: "LeetCode profile", isX: false },
+      { Icon: Linkedin, href: "https://www.linkedin.com/in/rahulpodugu", label: "LinkedIn profile", variant: "indigo" as const, isX: false },
+      { Icon: Github, href: "https://github.com/Rahul2251999", label: "GitHub profile", variant: "default" as const, isX: false },
+      { href: "http://x.com/rahulku67492929", label: "X profile", variant: "default" as const, isX: true },
+      { Icon: Instagram, href: "https://www.instagram.com/rahul_podugu/", label: "Instagram profile", variant: "red" as const, isX: false },
+      { Icon: Code, href: "https://leetcode.com/u/rahulpodugu2/", label: "LeetCode profile", variant: "green" as const, isX: false },
     ],
     [],
   );
@@ -153,22 +154,21 @@ export function PortfolioHero() {
                 style={{ fontFamily: "'Antic', sans-serif" }}
               />
             </div>
-            <div className="flex flex-wrap justify-center gap-3 relative z-30">
-              {socialIcons.map(({ Icon, href, label, isX }) => (
-                <a
+            <div className="flex flex-wrap justify-center gap-4 relative z-30">
+              {socialIcons.map(({ Icon, href, label, variant, isX }) => (
+                <FancyButton
                   key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="relative z-30 pointer-events-auto flex h-11 w-11 items-center justify-center rounded-xl border border-border/60 bg-black/60 text-neutral-300 transition-all duration-200 hover:-translate-y-1 hover:border-white/60 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ring-offset-black cursor-pointer"
-                >
-                  {isX ? (
-                    <XLogo size={18} className="text-current" />
-                  ) : (
-                    Icon && <Icon size={18} />
-                  )}
-                </a>
+                  icon={
+                    isX ? (
+                      <XLogo size={20} className="text-current" />
+                    ) : (
+                      Icon && <Icon size={20} className="text-current" />
+                    )
+                  }
+                  variant={variant}
+                  ariaLabel={label}
+                  onClick={() => window.open(href, '_blank', 'noopener noreferrer')}
+                />
               ))}
             </div>
           </div>
