@@ -41,22 +41,29 @@ export function About() {
       }
     };
 
-    // Simple direct reference to Resume.pdf in public folder
-    const resumeUrl = '/Resume.pdf';
+    // Try multiple resume URLs with fallbacks
+    const resumeUrls = [
+      '/Resume.pdf', // Public folder (for local/dev)
+      'https://rahul2251999.github.io/Resume.pdf', // GitHub Pages
+      'https://rahul2251999.github.io/portfolio/Resume.pdf', // Alternative GitHub Pages path
+    ];
     
-    // Try to download from public folder
-    const ok = await tryDownload(resumeUrl);
-    if (ok) return;
+    // Try each URL
+    for (const url of resumeUrls) {
+      const ok = await tryDownload(url);
+      if (ok) return;
+    }
 
-    // Fallback: open in new tab
+    // Final fallback: open GitHub URL in new tab
     if (typeof window !== 'undefined') {
+      const fallbackUrl = 'https://rahul2251999.github.io/Resume.pdf';
       try {
-        const popup = window.open(resumeUrl, '_blank', 'noopener');
+        const popup = window.open(fallbackUrl, '_blank', 'noopener');
         if (!popup) {
-          window.location.href = resumeUrl;
+          window.location.href = fallbackUrl;
         }
       } catch {
-        window.location.href = resumeUrl;
+        window.location.href = fallbackUrl;
       }
     }
   }, []);
