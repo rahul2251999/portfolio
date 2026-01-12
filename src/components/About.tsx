@@ -41,8 +41,9 @@ export function About() {
       }
     };
 
-    // Use Resume.pdf from public folder (works in both dev and production)
-    const resumeUrl = '/Resume.pdf';
+    // Build resume URL with base path support (for GitHub Pages)
+    const baseUrl = import.meta.env?.BASE_URL ?? '/';
+    const resumeUrl = `${baseUrl}Resume.pdf`.replace(/\/+/g, '/');
     
     // Try to download
     const ok = await tryDownload(resumeUrl);
