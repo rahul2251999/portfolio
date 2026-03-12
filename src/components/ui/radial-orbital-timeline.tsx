@@ -78,7 +78,9 @@ export default function RadialOrbitalTimeline({ timelineData }: RadialOrbitalTim
           return (
             <div
               key={item.id}
-              ref={(el) => (nodeRefs.current[item.id] = el)}
+              ref={(el) => {
+                nodeRefs.current[item.id] = el;
+              }}
               className="absolute cursor-pointer transition-all duration-700"
               style={{
                 transform: `translate(${position.x}px, ${position.y}px)` ,

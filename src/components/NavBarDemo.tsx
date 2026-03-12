@@ -1,3 +1,5 @@
+"use client";
+
 import { Home, User, Briefcase, Code, Mail, Sparkles } from 'lucide-react'
 import { NavBar } from "@/components/ui/tubelight-navbar"
 

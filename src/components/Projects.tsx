@@ -1,150 +1,31 @@
-import type { ReactNode } from 'react';
-import { useState } from 'react';
-import { ArrowUpRight, Brain, Database, Server } from 'lucide-react';
-import { GlowingEffect } from '@/components/ui/glowing-effect';
+"use client";
 
-export function Projects() {
-  const projects: ProjectCard[] = [
-    {
-      title: "Decentralized File Sharing System",
-      description: "I crafted a peer to peer file sharing network that pairs RSA and AES encryption with a distributed hash table so neighbors can discover each other quickly. The multithreaded pipeline keeps transfers nimble even when peers churn.",
-      icon: <Server className="w-4 h-4 text-blue-500" />,
-      tags: ["Java", "Peer to Peer", "Encryption"],
-      highlight: "Distributed storytelling about trust, speed, and resilience",
-      link: "https://github.com/rahul2251999/Peer-to-Peer-Secured-File-System"
-    },
-    {
-      title: "FinSight AI",
-      description: "Architected an end-to-end RAG system on AWS (FastAPI, LlamaIndex, OpenSearch Serverless, S3) to deliver semantic retrieval across payment regulations, KYC/AML policies, and fraud playbooks. Fine-tuned and deployed an open-source LLaMA model with QLoRA on Amazon SageMaker for scalable inference, improving answer consistency and reducing hallucinations by 35%. Developed a transaction-aware risk engine that fuses RAG outputs with DynamoDB-backed merchant and anomaly data to surface real-time risk scores and remediation insights, running on ECS Fargate with CI/CD and CloudWatch monitoring.",
-      icon: <Brain className="w-4 h-4 text-purple-500" />,
-      tags: ["AWS", "RAG", "LLM", "SageMaker"],
-      highlight: "AWS-native fintech RAG platform with real-time risk intelligence",
-      link: "https://github.com/rahul2251999/FinSight-AI"
-    },
-    {
-      title: "AI Customer Support Chatbot",
-      description: "An AI assistant that blends LangChain, Azure Bot Services, and custom natural language pipelines so on-call engineers can surface answers inside incident heat without sifting through endless runbooks.",
-      icon: <Brain className="w-4 h-4 text-purple-500" />,
-      tags: ["AI", "NLP", "Azure"],
-      highlight: "Conversational systems grounded in context and empathy",
-      link: "https://github.com/rahul2251999/AI-Powered-Customer-Support-Chatbot"
-    },
-    {
-      title: "Distributed Cache System",
-      description: "A distributed cache stitched together with Redis and consistent hashing so applications stay responsive even as nodes ebb and flow across the cluster.",
-      icon: <Database className="w-4 h-4 text-cyan-500" />,
-      tags: ["Redis", "Distributed", "Cache"],
-      highlight: "Clustered caching that embraces graceful failover",
-      link: "https://github.com/rahul2251999/Distributed-Cache-System"
-    }
-  ];
+import { motion } from "framer-motion";
+import { GlowingEffectDemo } from "./ui/glowing-effect-demo";
 
+export default function Projects() {
   return (
-    <section className="section py-24 bg-pure-black" id="projects">
-      <div className="container mx-auto px-4">
-        <div className="mb-12 max-w-4xl">
+    <section className="relative z-20 bg-pure-black pt-24 pb-24 px-6 md:px-12" id="projects">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mb-16 text-center"
+        >
           <span className="text-sm uppercase tracking-[0.4em] text-accent-gray">Recent Builds</span>
-          <h2 className="mt-4 text-4xl font-bold text-accent-white sm:text-5xl">
+          <h2 className="mt-4 text-3xl font-bold text-accent-white md:text-5xl">
             Systems I&apos;m excited to have shipped
           </h2>
-          <p className="mt-4 text-accent-gray text-sm md:text-base max-w-2xl">
+          <p className="mt-4 mx-auto max-w-2xl text-sm text-accent-gray md:text-base">
             Distributed rails, real-time engines, and AI copilots that keep teams calm when the load spikes.
           </p>
-        </div>
-        
-        <ul className="projects-content grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {projects.map((project) => (
-            <ProjectCard key={project.title} {...project} />
-          ))}
-        </ul>
+          <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-white/20" />
+        </motion.div>
+
+        <GlowingEffectDemo />
       </div>
     </section>
-  );
-}
-
-interface ProjectCard {
-  icon: ReactNode;
-  title: string;
-  description: string;
-  tags: string[];
-  link: string;
-  highlight: string;
-}
-
-function ProjectCard({
-  icon,
-  title,
-  description,
-  tags,
-  link,
-  highlight,
-}: ProjectCard) {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const MAX_LENGTH = 150;
-  const shouldTruncate = description.length > MAX_LENGTH;
-  const displayText = isExpanded || !shouldTruncate 
-    ? description 
-    : description.slice(0, MAX_LENGTH) + '...';
-
-  return (
-    <li className="list-none">
-      <div className="group relative flex h-full flex-col rounded-[1.25rem] border border-border/60 bg-background/60 p-3 backdrop-blur md:rounded-2xl md:p-4">
-        <GlowingEffect
-          spread={40}
-          glow
-          disabled={false}
-          proximity={64}
-          inactiveZone={0.01}
-          borderWidth={3}
-        />
-          <div className="relative z-10 flex h-full flex-col gap-6 overflow-hidden rounded-xl border border-border/60 bg-background/80 p-6 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:border-accent-white/40 group-hover:bg-background dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)]">
-          <div className="h-24 w-full rounded-lg bg-gradient-to-br from-accent-white/10 via-dark-gray/40 to-transparent ring-1 ring-inset ring-border/30 transition-transform duration-500 group-hover:scale-[1.02]" />
-          <div className="relative flex flex-1 flex-col justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-muted">
-                {icon}
-              </div>
-              <h3 className="text-xl font-semibold leading-tight tracking-[-0.04em] text-accent-white md:text-2xl">
-                {title}
-              </h3>
-            </div>
-            <div>
-              <p className="text-sm text-accent-gray md:text-base">{displayText}</p>
-              {shouldTruncate && (
-                <button
-                  onClick={() => setIsExpanded(!isExpanded)}
-                  className="mt-2 text-xs font-medium text-accent-white hover:text-accent-gray transition-colors duration-200"
-                >
-                  {isExpanded ? 'Read less' : 'Read more'}
-                </button>
-              )}
-            </div>
-            <div className="rounded-lg border border-border/60 bg-dark-gray/40 px-4 py-2 text-xs font-medium uppercase tracking-widest text-accent-gray">
-              {highlight}
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-border px-3 py-1 text-xs font-medium uppercase tracking-widest text-accent-gray"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <a
-              href={link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative z-10 pointer-events-auto mt-2 inline-flex items-center gap-2 text-sm font-semibold text-accent-white transition-colors hover:text-accent-gray focus:outline-none focus:ring-2 focus:ring-accent-white/50 focus:ring-offset-2 focus:ring-offset-pure-black rounded-md px-2 py-1 cursor-pointer"
-              aria-label={`View ${title} repository on GitHub`}
-            >
-              View Repository
-              <ArrowUpRight className="h-4 w-4" />
-            </a>
-          </div>
-        </div>
-      </div>
-    </li>
   );
 }

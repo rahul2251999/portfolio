@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { Code, Github, Instagram, Linkedin } from "lucide-react";
 import profile from "@/assets/image1.png";
 import FancyButton from "@/components/ui/shiny-button";
+import HeroText from "@/components/ui/hero-shutter-text";
 
 // Custom X Logo Component matching X branding
 const XLogo = ({ size = 18, className = "" }: { size?: number; className?: string }) => (
@@ -118,25 +119,30 @@ export function PortfolioHero() {
     >
       <main className="relative flex min-h-screen flex-col">
         <div className="pointer-events-none absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 px-4">
-          <div className="relative text-center">
-            <BlurText
+          <div
+            className="relative text-center"
+            style={{ fontFamily: "'Fira Code', monospace" }}
+          >
+            {/* Soft radial glow behind avatar */}
+            <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[190px] w-[190px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(190,242,100,0.5),transparent_65%)] blur-3xl opacity-80 sm:h-[230px] sm:w-[230px] md:h-[260px] md:w-[260px]" />
+            <HeroText
               text="RAHUL"
-              delay={90}
-              animateBy="letters"
-              direction="top"
-              className="justify-center whitespace-nowrap font-bold leading-[0.75] tracking-tighter text-[110px] text-lime-300 sm:text-[160px] md:text-[210px] lg:text-[240px]"
-              style={{ fontFamily: "'Fira Code', monospace" }}
+              inline
+              characterClassName="text-[110px] sm:text-[160px] md:text-[210px] lg:text-[240px] leading-[0.75] font-bold tracking-tighter text-lime-300"
+              className="whitespace-nowrap"
             />
-            <BlurText
-              text="PODUGU"
-              delay={90}
-              animateBy="letters"
-              direction="top"
-              className="justify-center whitespace-nowrap font-bold leading-[0.75] tracking-tighter text-[110px] text-lime-300 sm:text-[160px] md:text-[210px] lg:text-[240px]"
-              style={{ fontFamily: "'Fira Code', monospace" }}
-            />
+            <div className="relative inline-block">
+              <HeroText
+                text="PODUGU"
+                inline
+                characterClassName="text-[110px] sm:text-[160px] md:text-[210px] lg:text-[240px] leading-[0.75] font-bold tracking-tighter text-lime-300"
+                className="whitespace-nowrap"
+              />
+              {/* Underline accent tied to last name */}
+              <div className="pointer-events-none mx-auto mt-4 h-[3px] w-32 rounded-full bg-gradient-to-r from-lime-300/0 via-lime-300/80 to-emerald-400/0 sm:w-40 md:w-48" />
+            </div>
 
-            <div className="absolute left-1/2 top-1/2 z-10 h-[120px] w-[70px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full shadow-2xl transition-transform duration-300 hover:scale-110 sm:h-[160px] sm:w-[95px] md:h-[190px] md:w-[115px] lg:h-[225px] lg:w-[135px]">
+            <div className="absolute left-1/2 top-1/2 z-10 h-[120px] w-[70px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full shadow-[0_0_40px_rgba(190,242,100,0.35)] ring-2 ring-lime-300/40 transition-transform duration-300 hover:scale-110 sm:h-[160px] sm:w-[95px] md:h-[190px] md:w-[115px] lg:h-[225px] lg:w-[135px]">
               <img src={profile} alt="Rahul Podugu" className="h-full w-full object-cover" />
             </div>
           </div>
@@ -144,17 +150,29 @@ export function PortfolioHero() {
 
         <div className="absolute left-1/2 bottom-4 z-20 w-full -translate-x-1/2 px-6 sm:bottom-8 md:bottom-12 lg:bottom-16 xl:bottom-20">
           <div className="flex flex-col items-center gap-6">
-            <div className="flex justify-center">
+            <div className="flex flex-col items-center gap-3">
               <BlurText
-                text="Building Reliable Backend Systems."
-                delay={150}
+                text="Software Engineer · Backend, Payments, AI Systems"
+                delay={70}
                 animateBy="words"
                 direction="top"
-                className="text-center text-[15px] text-neutral-400 transition-colors duration-300 hover:text-white sm:text-[18px] md:text-[20px] lg:text-[22px]"
+                className="text-center text-[11px] sm:text-[13px] md:text-[14px] lg:text-[15px] uppercase tracking-[0.3em] bg-gradient-to-r from-lime-300 via-emerald-300 to-cyan-300 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(190,242,100,0.35)]"
+                style={{ fontFamily: "'Antic', sans-serif" }}
+              />
+              <BlurText
+                text="Designing calm, reliable platforms across payment rails, analytics pipelines, and AI workloads."
+                delay={120}
+                animateBy="words"
+                direction="top"
+                className="text-center text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] text-neutral-300/90 transition-colors duration-300 hover:text-white max-w-3xl"
                 style={{ fontFamily: "'Antic', sans-serif" }}
               />
             </div>
-            <div className="flex flex-wrap justify-center gap-4 relative z-30">
+            <div className="flex flex-col items-center gap-2 relative z-30">
+              <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.25em] text-neutral-500/80">
+                Find me around the web
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
               {socialIcons.map(({ Icon, href, label, variant, isX }) => (
                 <FancyButton
                   key={label}
@@ -170,6 +188,7 @@ export function PortfolioHero() {
                   onClick={() => window.open(href, '_blank', 'noopener noreferrer')}
                 />
               ))}
+              </div>
             </div>
           </div>
         </div>

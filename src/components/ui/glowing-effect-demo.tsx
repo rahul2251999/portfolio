@@ -1,57 +1,73 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { Box, Lock, Search, Settings, Sparkles } from "lucide-react";
+import { ArrowUpRight, Box, Database, GitBranch, Layers } from "lucide-react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { cn } from "@/lib/utils";
+import finsightImage from "../../../Projects images/Finsight.png";
+import decentralizedImage from "../../../Projects images/decentralised.png";
+import chatbotImage from "../../../Projects images/chatbot.png";
+import cacheImage from "../../../Projects images/cache.png";
 
 export function GlowingEffectDemo() {
   return (
-    <ul className="grid grid-cols-1 grid-rows-none gap-4 md:grid-cols-12 md:grid-rows-3 lg:gap-4 xl:max-h-[34rem] xl:grid-rows-2">
+    <ul className="mb-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-6 xl:grid-cols-3">
       <GridItem
-        area="md:[grid-area:1/1/2/7] xl:[grid-area:1/1/2/5]"
-        icon={<Box className="h-4 w-4" />}
-        title="Do things the right way"
-        description="Running out of copy so I'll write anything."
+        icon={<Database className="h-4 w-4 text-emerald-400" />}
+        title="FinSight AI"
+        description="An AWS-native RAG engine combining FastAPI, LlamaIndex, and OpenSearch Serverless to surface real-time risk signals from payment regulations and fraud narratives."
+        meta="AWS-native fintech RAG platform with real-time risk intelligence"
+        tags={["AWS", "RAG", "LLM", "SageMaker"]}
+        repoUrl="https://github.com/rahul2251999/FinSight-AI"
+        imageSrc={finsightImage as string}
       />
       <GridItem
-        area="md:[grid-area:1/7/2/13] xl:[grid-area:2/1/3/5]"
-        icon={<Settings className="h-4 w-4" />}
-        title="The best AI code editor ever."
-        description="Yes, it's true. I'm not even kidding. Ask my mom if you don't believe me."
+        icon={<GitBranch className="h-4 w-4 text-sky-400" />}
+        title="Decentralized File Sharing System"
+        description="Peer-to-peer file sharing with RSA/AES encryption and a distributed hash table so neighbors can discover each other quickly and securely."
+        meta="Distributed storytelling about trust, speed, and resilience"
+        tags={["Java", "Peer to Peer", "Encryption"]}
+        repoUrl="https://github.com/rahul2251999/Peer-to-Peer-Secured-File-System"
+        imageSrc={decentralizedImage as string}
       />
       <GridItem
-        area="md:[grid-area:2/1/3/7] xl:[grid-area:1/5/3/8]"
-        icon={<Lock className="h-4 w-4" />}
-        title="You should buy Aceternity UI Pro"
-        description="It's the best money you'll ever spend"
+        icon={<Box className="h-4 w-4 text-purple-400" />}
+        title="AI Customer Support Chatbot"
+        description="An AI assistant on Azure with custom NLP pipelines that handles 1,000+ daily incidents through contextual, multi-turn conversations."
+        meta="Conversational systems grounded in context and empathy"
+        tags={["AI", "NLP", "Azure"]}
+        repoUrl="https://github.com/rahul2251999/AI-Powered-Customer-Support-Chatbot"
+        imageSrc={chatbotImage as string}
       />
       <GridItem
-        area="md:[grid-area:2/7/3/13] xl:[grid-area:1/8/2/13]"
-        icon={<Sparkles className="h-4 w-4" />}
-        title="This card is also built by Cursor"
-        description="I'm not even kidding. Ask my mom if you don't believe me."
-      />
-      <GridItem
-        area="md:[grid-area:3/1/4/13] xl:[grid-area:2/8/3/13]"
-        icon={<Search className="h-4 w-4" />}
-        title="Coming soon on Aceternity UI"
-        description="I'm writing the code as I record this, no shit."
+        icon={<Layers className="h-4 w-4 text-amber-300" />}
+        title="Distributed Cache System"
+        description="A Redis-backed distributed cache with consistent hashing that keeps services responsive even as nodes ebb and flow across the cluster."
+        meta="Clustered caching that embraces graceful failover"
+        tags={["Redis", "Distributed", "Cache"]}
+        repoUrl="https://github.com/rahul2251999/Distributed-Cache-System"
+        imageSrc={cacheImage as string}
       />
     </ul>
   );
 }
 
 interface GridItemProps {
-  area: string;
   icon: ReactNode;
   title: string;
   description: ReactNode;
+  meta?: string;
+  tags?: string[];
+  repoUrl?: string;
+  imageSrc?: string | { src: string };
 }
 
-const GridItem = ({ area, icon, title, description }: GridItemProps) => {
+const GridItem = ({ icon, title, description, meta, tags, repoUrl, imageSrc }: GridItemProps) => {
+  const resolvedImageSrc =
+    typeof imageSrc === "string" ? imageSrc : imageSrc?.src;
+
   return (
-    <li className={cn("min-h-[14rem] list-none", area)}>
+    <li className={cn("min-h-[18rem] list-none")}>
       <div className="relative h-full rounded-[1.25rem] border-[0.75px] border-border p-2 md:rounded-[1.5rem] md:p-3">
         <GlowingEffect
           spread={40}
@@ -61,8 +77,21 @@ const GridItem = ({ area, icon, title, description }: GridItemProps) => {
           inactiveZone={0.01}
           borderWidth={3}
         />
-        <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] bg-background p-6 shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] md:p-6">
-          <div className="relative flex flex-1 flex-col justify-between gap-3">
+        <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-2xl border-[0.75px] bg-background p-6 shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] md:p-6">
+          {/* top panel / image */}
+          {resolvedImageSrc ? (
+            <div className="mb-5 h-28 w-full overflow-hidden rounded-xl bg-black">
+              <img
+                src={resolvedImageSrc}
+                alt={title}
+                className="h-full w-full object-cover object-center"
+              />
+            </div>
+          ) : (
+            <div className="mb-5 h-20 w-full rounded-xl bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.14),_transparent_60%)]" />
+          )}
+
+          <div className="relative flex flex-1 flex-col justify-between gap-4">
             <div className="w-fit rounded-lg border-[0.75px] border-border bg-muted p-2">
               {icon}
             </div>
@@ -70,14 +99,44 @@ const GridItem = ({ area, icon, title, description }: GridItemProps) => {
               <h3 className="pt-0.5 text-xl font-sans font-semibold leading-[1.375rem] tracking-[-0.04em] text-balance text-foreground md:text-2xl md:leading-[1.875rem]">
                 {title}
               </h3>
-              <h2 className="font-sans text-sm leading-[1.125rem] text-muted-foreground md:text-base md:leading-[1.375rem] [&_b]:md:font-semibold [&_strong]:md:font-semibold">
+              <p className="font-sans text-sm leading-[1.25rem] text-muted-foreground md:text-[0.95rem] md:leading-[1.4rem]">
                 {description}
-              </h2>
+              </p>
+              {meta && (
+                <p className="mt-1 inline-flex rounded-full border border-border bg-black/40 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.16em] text-accent-gray">
+                  {meta}
+                </p>
+              )}
+              {tags && tags.length > 0 && (
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full border border-border bg-black/40 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.16em] text-accent-gray"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
+
+          {repoUrl && (
+            <div className="mt-4 flex items-center justify-between text-sm font-medium text-accent-white">
+              <a
+                href={repoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs md:text-sm"
+              >
+                <span>View Repository</span>
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+            </div>
+          )}
         </div>
       </div>
     </li>
   );
 };
-
