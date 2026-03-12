@@ -17,6 +17,11 @@ export default function ScrollyCanvas() {
 
   const frameIndex = useTransform(scrollYProgress, [0, 1], [0, totalFrames - 1]);
 
+  // Base path for GitHub Pages (e.g. /portfolio) so sequence images load correctly
+  const basePath = typeof process.env.NEXT_PUBLIC_BASE_PATH === "string"
+    ? process.env.NEXT_PUBLIC_BASE_PATH
+    : "";
+
   // Preload images
   useEffect(() => {
     const preloadImages = async () => {
@@ -25,7 +30,7 @@ export default function ScrollyCanvas() {
         const img = new Image();
         // Matching the actual file naming: frame_00_delay-0.066s.webp
         const frameStr = i.toString().padStart(2, "0");
-        img.src = `/sequence/frame_${frameStr}_delay-0.066s.webp`;
+        img.src = `${basePath}/sequence/frame_${frameStr}_delay-0.066s.webp`;
         await new Promise((resolve) => {
           img.onload = resolve;
           img.onerror = resolve; // Continue even if one fails
@@ -37,7 +42,7 @@ export default function ScrollyCanvas() {
     };
 
     preloadImages();
-  }, []);
+  }, [basePath]);
 
   // Sync canvas with scroll
   useEffect(() => {
