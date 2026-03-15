@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { ElementType } from "react";
-import { Badge } from "@/components/ui/badge";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface TimelineItem {
   id: number;
@@ -21,134 +21,190 @@ interface RadialOrbitalTimelineProps {
   timelineData: TimelineItem[];
 }
 
+const RADIUS = 185;   // px from centre to node centre
+const RPF    = 0.20;  // degrees rotated per animation frame
+
 export default function RadialOrbitalTimeline({ timelineData }: RadialOrbitalTimelineProps) {
-  const [rotationAngle, setRotationAngle] = useState(0);
-  const [autoRotate, setAutoRotate] = useState(true);
-  const [activeId, setActiveId] = useState<number | null>(timelineData[0]?.id ?? null);
+  const total = timelineData.length;
 
-  const nodeRefs = useRef<Record<number, HTMLDivElement | null>>({});
+  // ── React state: only for the active item (triggers card swap) ──────────
+  const [activeId, setActiveId] = useState<number>(timelineData[0]?.id ?? 1);
 
+  // ── Mutable refs: drive the animation without causing re-renders ─────────
+  const activeIdRef = useRef(activeId);
+  const pausedRef   = useRef(false);
+  const rotRef      = useRef(0);
+  const rafRef      = useRef<number>(0);
+
+  const wrapperRefs = useRef<(HTMLDivElement  | null)[]>(Array(total).fill(null));
+  const innerRefs   = useRef<(HTMLDivElement  | null)[]>(Array(total).fill(null));
+  const labelRefs   = useRef<(HTMLSpanElement | null)[]>(Array(total).fill(null));
+
+  // Keep activeIdRef in sync so the RAF loop reads the latest value
+  useEffect(() => { activeIdRef.current = activeId; }, [activeId]);
+
+  // ── Main animation loop ─────────────────────────────────────────────────
   useEffect(() => {
-    if (!autoRotate) return;
-    const timer = setInterval(() => {
-      setRotationAngle((prev) => Number(((prev + 0.3) % 360).toFixed(3)));
-    }, 50);
-    return () => clearInterval(timer);
-  }, [autoRotate]);
+    const tick = () => {
+      if (!pausedRef.current) {
+        rotRef.current = (rotRef.current + RPF) % 360;
+      }
 
-  const handleActivate = (id: number) => {
+      timelineData.forEach((item, i) => {
+        const wrapper = wrapperRefs.current[i];
+        if (!wrapper) return;
+
+        const rad     = ((i / total) * 360 + rotRef.current) * (Math.PI / 180);
+        const x       = RADIUS * Math.cos(rad);
+        const y       = RADIUS * Math.sin(rad);
+        const depth   = Math.sin(rad);                             // -1 (back) → 1 (front)
+        const isActive = item.id === activeIdRef.current;
+        const opacity  = isActive ? 1 : 0.3 + 0.6 * ((1 + depth) / 2);
+
+        // Position — direct DOM, no React state, no CSS transition on wrapper
+        wrapper.style.transform = `translate(calc(${x}px - 50%), calc(${y}px - 50%))`;
+        wrapper.style.opacity   = String(opacity);
+        wrapper.style.zIndex    = isActive ? "50" : String(Math.round(10 + 10 * depth));
+
+        // Icon button — CSS transitions only for colour/scale, NOT for position
+        const inner = innerRefs.current[i];
+        if (inner) {
+          if (isActive) {
+            inner.style.borderColor     = "rgba(255,255,255,1)";
+            inner.style.backgroundColor = "rgba(255,255,255,1)";
+            inner.style.color           = "rgba(0,0,0,1)";
+            inner.style.transform       = "scale(1.4)";
+            inner.style.boxShadow       = "0 0 24px rgba(255,255,255,0.25)";
+          } else {
+            inner.style.borderColor     = "rgba(255,255,255,0.3)";
+            inner.style.backgroundColor = "rgba(0,0,0,1)";
+            inner.style.color           = "rgba(255,255,255,1)";
+            inner.style.transform       = "scale(1)";
+            inner.style.boxShadow       = "none";
+          }
+        }
+
+        // Label
+        const label = labelRefs.current[i];
+        if (label) {
+          label.style.opacity    = isActive ? "1"   : "0.45";
+          label.style.fontWeight = isActive ? "600" : "400";
+        }
+      });
+
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [timelineData, total]);
+
+  // ── Interaction handlers ────────────────────────────────────────────────
+  const handleActivate = useCallback((id: number) => {
+    pausedRef.current   = true;
+    activeIdRef.current = id;
     setActiveId(id);
-    setAutoRotate(false);
-  };
+  }, []);
 
-  const handleDeactivate = () => {
-    setAutoRotate(true);
-  };
+  const handleDeactivate = useCallback(() => {
+    pausedRef.current = false;
+  }, []);
 
-  const activeItem = useMemo(
-    () => timelineData.find((item) => item.id === activeId) ?? timelineData[0],
-    [activeId, timelineData],
-  );
-
-  const calculateNodePosition = (index: number, total: number) => {
-    const angle = ((index / total) * 360 + rotationAngle) % 360;
-    const radius = 200;
-    const radian = (angle * Math.PI) / 180;
-    const x = radius * Math.cos(radian);
-    const y = radius * Math.sin(radian);
-    const zIndex = Math.round(100 + 50 * Math.cos(radian));
-    const opacity = Math.max(0.4, Math.min(1, 0.4 + 0.6 * ((1 + Math.sin(radian)) / 2)));
-    return { x, y, angle, zIndex, opacity };
-  };
+  const activeItem = timelineData.find(item => item.id === activeId) ?? timelineData[0];
 
   return (
     <div
-      className="relative mx-auto flex h-[620px] w-full max-w-5xl items-center justify-center px-6"
+      className="relative mx-auto flex w-full max-w-4xl items-center justify-center select-none"
+      style={{ height: "500px" }}
       onMouseLeave={handleDeactivate}
     >
-      <div className="relative flex h-[600px] w-full max-w-4xl items-center justify-center overflow-visible rounded-[2.5rem] border border-white/10 bg-black">
-        <div className="pointer-events-none absolute h-16 w-16 animate-pulse rounded-full bg-gradient-to-br from-purple-500 via-blue-500 to-teal-500" />
-        <div className="pointer-events-none absolute h-96 w-96 rounded-full border border-white/10" />
+      {/* Orbit guide ring */}
+      <div
+        className="pointer-events-none absolute rounded-full border border-white/[0.07]"
+        style={{ width: RADIUS * 2, height: RADIUS * 2 }}
+      />
+      {/* Inner subtle ring */}
+      <div className="pointer-events-none absolute h-8 w-8 rounded-full border border-white/10" />
 
-        {timelineData.map((item, index) => {
-          const position = calculateNodePosition(index, timelineData.length);
-          const isActive = activeItem?.id === item.id;
-          const Icon = item.icon;
-
-          return (
+      {/* ── Orbit nodes ─────────────────────────────────────────────────── */}
+      {timelineData.map((item, i) => {
+        const Icon = item.icon;
+        return (
+          <div
+            key={item.id}
+            ref={el => { wrapperRefs.current[i] = el; }}
+            className="absolute left-1/2 top-1/2"
+            style={{ willChange: "transform, opacity" }}
+            onMouseEnter={() => handleActivate(item.id)}
+            onClick={() => handleActivate(item.id)}
+          >
+            {/* Icon circle */}
             <div
-              key={item.id}
-              ref={(el) => {
-                nodeRefs.current[item.id] = el;
-              }}
-              className="absolute cursor-pointer transition-all duration-700"
+              ref={el => { innerRefs.current[i] = el; }}
+              className="flex h-11 w-11 items-center justify-center rounded-full border-2"
               style={{
-                transform: `translate(${position.x}px, ${position.y}px)` ,
-                zIndex: isActive ? 200 : position.zIndex,
-                opacity: isActive ? 1 : position.opacity,
-              }}
-              onMouseEnter={() => handleActivate(item.id)}
-              onClick={(e) => {
-                e.stopPropagation();
-                handleActivate(item.id);
+                borderColor:     "rgba(255,255,255,0.3)",
+                backgroundColor: "rgba(0,0,0,1)",
+                color:           "rgba(255,255,255,1)",
+                cursor:          "pointer",
+                transition:      "transform 0.3s cubic-bezier(0.16,1,0.3,1), border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease",
               }}
             >
-              <div
-                className={`absolute -inset-1 rounded-full ${isActive ? "animate-pulse" : ""}`}
-                style={{
-                  background:
-                    "radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%)",
-                  width: `${item.energy * 0.5 + 40}px`,
-                  height: `${item.energy * 0.5 + 40}px`,
-                  left: `-${(item.energy * 0.5 + 40 - 40) / 2}px`,
-                  top: `-${(item.energy * 0.5 + 40 - 40) / 2}px`,
-                }}
-              />
-
-              <div
-                className={`flex h-12 w-12 items-center justify-center rounded-full border-2 transition-transform duration-300 ${
-                  isActive
-                    ? "scale-150 border-white bg-white text-black shadow-lg shadow-white/30"
-                    : "border-white/40 bg-black text-white hover:scale-110"
-                }`}
-              >
-                <Icon size={18} />
-              </div>
-
-              <div
-                className={`absolute top-14 whitespace-nowrap text-xs font-semibold tracking-wider transition-all duration-300 ${
-                  isActive ? "scale-125 text-white" : "text-white/70"
-                }`}
-              >
-                {item.title}
-              </div>
+              <Icon size={16} />
             </div>
-          );
-        })}
 
-        {activeItem && (
-          <div className="pointer-events-none absolute right-[-10rem] top-1/2 hidden -translate-y-1/2 lg:flex">
-            <div className="skill-card-spin">
-              <div className="skill-card-spin-inner pointer-events-auto flex w-80 flex-col items-center gap-3 rounded-3xl border border-white/25 bg-[rgba(0,0,0,0.95)] px-8 py-6 text-center shadow-[0_25px_70px_rgba(0,0,0,0.6)]">
-                <Badge className="border-white/40 bg-black/60 text-white/80">{activeItem.category}</Badge>
-                <h3 className="text-xl font-semibold text-accent-white">{activeItem.title}</h3>
-                {activeItem.skills && activeItem.skills.length > 0 && (
-                  <div className="flex max-w-xs flex-wrap justify-center gap-2 text-xs text-white/70">
-                    {activeItem.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="rounded-full border border-white/20 bg-white/10 px-3 py-1"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
+            {/* Category label */}
+            <span
+              ref={el => { labelRefs.current[i] = el; }}
+              className="absolute left-1/2 whitespace-nowrap text-[10px] tracking-widest text-white/45 uppercase"
+              style={{
+                top: "calc(100% + 10px)",
+                transform: "translateX(-50%)",
+                transition: "opacity 0.25s ease",
+              }}
+            >
+              {item.category}
+            </span>
           </div>
-        )}
-      </div>
+        );
+      })}
+
+      {/* ── Centre skill card (inside the orbit, animated on active change) ─ */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeItem?.id}
+          initial={{ opacity: 0, scale: 0.9, y: 6 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.9, y: -6 }}
+          transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+          className="pointer-events-none absolute flex flex-col items-center gap-2 text-center px-2"
+          style={{ maxWidth: "210px", zIndex: 5 }}
+        >
+          <p className="text-[9px] uppercase tracking-[0.35em] text-white/30">
+            {activeItem?.category}
+          </p>
+          <h3 className="text-[15px] font-semibold leading-tight text-white">
+            {activeItem?.title}
+          </h3>
+          {activeItem?.skills && activeItem.skills.length > 0 && (
+            <div className="mt-1 flex flex-wrap justify-center gap-1.5">
+              {activeItem.skills.slice(0, 8).map(skill => (
+                <span
+                  key={skill}
+                  className="rounded-full border border-white/10 bg-white/[0.05] px-2.5 py-0.5 text-[9px] text-white/50"
+                >
+                  {skill}
+                </span>
+              ))}
+              {activeItem.skills.length > 8 && (
+                <span className="rounded-full px-2.5 py-0.5 text-[9px] text-white/25">
+                  +{activeItem.skills.length - 8} more
+                </span>
+              )}
+            </div>
+          )}
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }

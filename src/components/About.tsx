@@ -1,10 +1,32 @@
 "use client";
 
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { AnimatedDownload } from './ui/animated-download';
 import { Button } from './ui/button';
 import HyperTextParagraph from './ui/hyper-text-with-decryption';
+import { useInView } from 'framer-motion';
+
+function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true });
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+    let current = 0;
+    const step = 16;
+    const increment = to / (1000 / step);
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= to) { setCount(to); clearInterval(timer); }
+      else setCount(Math.floor(current));
+    }, step);
+    return () => clearInterval(timer);
+  }, [isInView, to]);
+
+  return <span ref={ref}>{count}{suffix}</span>;
+}
 
 export function About() {
   const [isDownloading, setIsDownloading] = useState(false);
@@ -21,47 +43,22 @@ export function About() {
     setIsDownloading(true);
   }, [isDownloading]);
 
-  const handleAnimationComplete = useCallback(async () => {
+  const handleAnimationComplete = useCallback(() => {
     setIsDownloading(false);
 
-    const tryDownload = async (target: string) => {
-      try {
-        const res = await fetch(target);
-        if (!res.ok) return false;
-        const blob = await res.blob();
-        const objectUrl = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = objectUrl;
-        a.download = 'Rahul_Podugu_Resume.pdf';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        URL.revokeObjectURL(objectUrl);
-        return true;
-      } catch {
-        return false;
-      }
-    };
+    // Direct anchor-click — most reliable on GitHub Pages static exports.
+    // fetch→blob fails silently when GitHub Pages sets odd headers; a plain
+    // <a download> always triggers the browser's native save dialog.
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+    const resumeUrl = `${basePath}/Resume.pdf`.replace(/\/\/+/g, '/');
 
-    // Build resume URL with base path support (for GitHub Pages)
-    const baseUrl = import.meta.env?.BASE_URL ?? '/';
-    const resumeUrl = `${baseUrl}Resume.pdf`.replace(/\/+/g, '/');
-    
-    // Try to download
-    const ok = await tryDownload(resumeUrl);
-    if (ok) return;
-
-    // Fallback: open in new tab (browser will handle the download)
-    if (typeof window !== 'undefined') {
-      try {
-        const popup = window.open(resumeUrl, '_blank', 'noopener');
-        if (!popup) {
-          window.location.href = resumeUrl;
-        }
-      } catch {
-        window.location.href = resumeUrl;
-      }
-    }
+    const a = document.createElement('a');
+    a.href = resumeUrl;
+    a.download = 'Rahul_Podugu_Resume.pdf';
+    a.rel = 'noopener noreferrer';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   }, []);
 
   return (
@@ -78,6 +75,22 @@ export function About() {
               highlightWords={["systems", "engineer", "backend", "platforms", "reliable"]}
               className="text-accent-gray text-xs md:text-sm"
             />
+          </div>
+
+          {/* Stats counters */}
+          <div className="mt-10 flex flex-wrap gap-8 pl-0">
+            {[
+              { value: 4, suffix: "+", label: "Years experience" },
+              { value: 10, suffix: "+", label: "Projects shipped" },
+              { value: 3, suffix: "", label: "Companies" },
+            ].map(({ value, suffix, label }) => (
+              <div key={label} className="flex flex-col gap-1">
+                <span className="text-3xl font-bold tracking-tight text-accent-white sm:text-4xl">
+                  <Counter to={value} suffix={suffix} />
+                </span>
+                <span className="text-xs uppercase tracking-[0.25em] text-accent-gray">{label}</span>
+              </div>
+            ))}
           </div>
         </div>
 

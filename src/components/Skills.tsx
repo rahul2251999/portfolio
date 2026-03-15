@@ -2,6 +2,7 @@
 
 import { Brain, Cloud, Code2, Database, Network, Layers } from 'lucide-react';
 import RadialOrbitalTimeline from '@/components/ui/radial-orbital-timeline';
+import { motion } from 'framer-motion';
 
 const skillsTimeline = [
   {
@@ -152,17 +153,29 @@ export function Skills() {
   return (
     <section id="skills" className="relative border-t border-dark-gray bg-pure-black py-24 mt-8">
       <div className="container mx-auto px-4">
-        <div className="mx-auto mb-12 max-w-6xl text-center">
+        <motion.div
+          className="mx-auto mb-12 max-w-6xl text-center"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
           <span className="text-sm uppercase tracking-[0.4em] text-accent-gray">Skills</span>
           <h2 className="mt-4 text-4xl font-bold text-accent-white sm:text-5xl">Technical Orbit</h2>
           <p className="mt-4 text-accent-gray">
             A systems-first toolkit honed across payment platforms, real-time analytics, and AI-assisted customer experiences.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="mx-auto max-w-6xl">
+        <motion.div
+          className="mx-auto max-w-6xl"
+          initial={{ opacity: 0, scale: 0.96 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+        >
           <RadialOrbitalTimeline timelineData={skillsTimeline} />
-        </div>
+        </motion.div>
 
       </div>
     </section>

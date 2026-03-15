@@ -1,107 +1,121 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { motion } from "framer-motion"
-import { LucideIcon } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { useEffect, useRef, useState } from "react";
+import type React from "react";
+import { motion } from "framer-motion";
+import type { LucideIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface NavItem {
-  name: string
-  url: string
-  icon: LucideIcon
+  name: string;
+  url: string;
+  icon: LucideIcon;
 }
 
 interface NavBarProps {
-  items: NavItem[]
-  className?: string
+  items: NavItem[];
+  className?: string;
 }
 
 export function NavBar({ items, className }: NavBarProps) {
-  const [activeTab, setActiveTab] = useState(items[0].name)
+  const [activeTab, setActiveTab] = useState(items[0].name);
+  const ticking = useRef(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY
-
-      // When the user is near the very top, always treat it as "Home"
-      if (scrollY < 120) {
-        setActiveTab(items[0].name)
-        return
-      }
-
-      const scrollPosition = scrollY + window.innerHeight * 0.3
-      let currentSection = items[0].name
-
-      items.forEach((item) => {
-        if (!item.url || !item.url.startsWith("#")) return
-        const section = document.querySelector<HTMLElement>(item.url)
-        if (!section) return
-
-        if (scrollPosition >= section.offsetTop) {
-          currentSection = item.name
+    const onScroll = () => {
+      if (ticking.current) return;
+      ticking.current = true;
+      requestAnimationFrame(() => {
+        const mid = window.scrollY + window.innerHeight * 0.35;
+        let best = items[0].name;
+        for (const item of items) {
+          if (!item.url.startsWith("#")) continue;
+          const el = document.querySelector<HTMLElement>(item.url);
+          if (el && el.offsetTop <= mid) best = item.name;
         }
-      })
+        setActiveTab((prev) => (prev === best ? prev : best));
+        ticking.current = false;
+      });
+    };
 
-      setActiveTab((prev) => (prev === currentSection ? prev : currentSection))
-    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [items]);
 
-    handleScroll()
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [items])
+  const handleClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    item: NavItem,
+  ) => {
+    e.preventDefault();
+    setActiveTab(item.name);
+    document.querySelector<HTMLElement>(item.url)
+      ?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
-    <div
-      className={cn(
-        "fixed top-6 left-1/2 -translate-x-1/2 z-50",
-        className,
-      )}
+    <motion.div
+      className={cn("fixed top-5 left-1/2 z-50 -translate-x-1/2", className)}
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1], delay: 2.25 }}
     >
-      <div className="relative z-50 flex items-center gap-3 rounded-full border border-border/60 bg-pure-black/80 px-1 py-1 shadow-lg backdrop-blur-lg">
+      <nav
+        aria-label="Site navigation"
+        className="flex items-center gap-1 rounded-full border border-white/[0.1] bg-black/75 p-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-xl"
+      >
         {items.map((item) => {
-          const Icon = item.icon
-          const isActive = activeTab === item.name
+          const Icon = item.icon;
+          const isActive = activeTab === item.name;
 
           return (
             <a
               key={item.name}
               href={item.url}
-              onClick={(e) => {
-                e.preventDefault();
-                setActiveTab(item.name);
-                const element = document.querySelector(item.url);
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
-              className={cn(
-                "relative z-50 pointer-events-auto cursor-pointer rounded-full px-5 py-2 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-accent-white/50 focus:ring-offset-2 focus:ring-offset-pure-black",
-                "text-accent-gray hover:text-accent-white",
-                isActive && "bg-background/60 text-accent-white",
-              )}
-              aria-label={`Navigate to ${item.name} section`}
+              aria-label={item.name}
               aria-current={isActive ? "page" : undefined}
-              >
-              <span className="hidden md:inline">{item.name}</span>
-              <span className="md:hidden flex items-center justify-center">
-                <Icon size={18} strokeWidth={2.5} />
-              </span>
+              onClick={(e) => handleClick(e, item)}
+              title={item.name}
+              className="group relative flex items-center"
+            >
+              {/* Sliding white bubble */}
               {isActive && (
-                <motion.div
-                  layoutId="lamp"
-                  className="absolute inset-0 w-full rounded-full bg-accent-white/10 -z-10"
-                  initial={false}
-                  transition={{
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 30,
-                  }}
+                <motion.span
+                  layoutId="bubble"
+                  className="absolute inset-0 rounded-full bg-white"
+                  transition={{ type: "spring", stiffness: 380, damping: 32 }}
                 />
               )}
+
+              {/* Icon + expanding label */}
+              <span
+                className={cn(
+                  "relative z-10 flex items-center gap-2 rounded-full transition-colors duration-200",
+                  isActive
+                    ? "px-4 py-2 text-black"
+                    : "p-2.5 text-white/40 hover:text-white/75",
+                )}
+              >
+                <Icon
+                  size={15}
+                  strokeWidth={isActive ? 2.5 : 2}
+                  className="shrink-0"
+                />
+                {/* Label slides open only for the active item */}
+                <span
+                  className="overflow-hidden whitespace-nowrap text-[10px] font-semibold uppercase tracking-[0.14em] transition-all duration-300"
+                  style={{
+                    maxWidth: isActive ? "72px" : "0px",
+                    opacity: isActive ? 1 : 0,
+                  }}
+                >
+                  {item.name}
+                </span>
+              </span>
             </a>
-          )
+          );
         })}
-      </div>
-    </div>
-  )
+      </nav>
+    </motion.div>
+  );
 }

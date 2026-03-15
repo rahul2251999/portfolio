@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Timeline } from "@/components/ui/timeline";
 import { Award, Zap } from "lucide-react";
 
@@ -157,17 +158,26 @@ export function TimelineDemo() {
   ];
 
   return (
-    <div className="container mx-auto px-4">
-      <div className="mx-auto mb-12 max-w-4xl px-0 md:px-4 lg:px-6">
-        <h2 className="text-left text-lg md:text-4xl font-bold text-accent-white mb-4">Experience</h2>
-        <p className="text-left text-accent-gray text-sm md:text-base max-w-2xl">
-          Roles that shaped my systems thinking, from fintech payments to AI research and large-scale distributed
-          platforms.
-        </p>
+    <section className="relative border-t border-dark-gray bg-pure-black py-24" id="experience">
+      <div className="container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mx-auto mb-12 max-w-4xl px-0 md:px-4 lg:px-6"
+        >
+          <span className="text-sm uppercase tracking-[0.4em] text-accent-gray">Career</span>
+          <h2 className="mt-4 text-4xl font-bold text-accent-white sm:text-5xl">Experience</h2>
+          <p className="mt-4 text-accent-gray max-w-2xl">
+            Roles that shaped my systems thinking — from fintech payments to AI research and large-scale distributed platforms.
+          </p>
+          <div className="mt-6 h-1 w-24 rounded-full bg-white/20" />
+        </motion.div>
+        <div className="mx-auto max-w-6xl px-0 md:px-4 lg:px-6">
+          <Timeline data={data} />
+        </div>
       </div>
-      <div className="mx-auto max-w-6xl px-0 md:px-4 lg:px-6">
-        <Timeline data={data} />
-      </div>
-    </div>
+    </section>
   );
 }

@@ -4,22 +4,65 @@ import { motion } from "framer-motion";
 
 export function Logo() {
   return (
-    <div className="fixed top-6 left-6 z-[60]">
-      <motion.a
+    <motion.div
+      className="fixed top-6 left-6 z-[60]"
+      initial={{ opacity: 0, x: -16 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 2.2 }}
+    >
+      <a
         href="#hero"
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.1 }}
-        className="group relative inline-flex items-center px-2 py-1"
+        aria-label="Home"
+        className="group flex items-center gap-2.5"
+        onClick={(e) => {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
       >
-        <span className="relative select-none text-2xl font-black tracking-tight text-white md:text-3xl -skew-y-3">
-          <span className="absolute -left-1 top-1 h-full w-full rounded-sm border border-lime-300/60 opacity-70 blur-[1px] group-hover:opacity-100 transition-opacity duration-200" />
-          <span className="relative px-1">
-            RP
+        {/* Geometric mark */}
+        <div className="relative flex h-8 w-8 items-center justify-center">
+          {/* Outer ring — fades in on hover */}
+          <div className="absolute inset-0 rounded-full border border-white/0 transition-all duration-500 group-hover:border-white/20 group-hover:scale-110" />
+          {/* Diamond */}
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 22 22"
+            fill="none"
+            className="transition-transform duration-500 group-hover:rotate-90"
+          >
+            <rect
+              x="11"
+              y="1.5"
+              width="13"
+              height="13"
+              rx="1.5"
+              transform="rotate(45 11 11)"
+              stroke="rgba(255,255,255,0.9)"
+              strokeWidth="1.25"
+            />
+            <rect
+              x="11"
+              y="5.5"
+              width="7"
+              height="7"
+              rx="0.5"
+              transform="rotate(45 11 11)"
+              fill="rgba(255,255,255,0.12)"
+            />
+          </svg>
+        </div>
+
+        {/* Wordmark */}
+        <div className="flex flex-col leading-none">
+          <span className="text-[11px] font-semibold tracking-[0.22em] text-white/90 uppercase transition-colors duration-300 group-hover:text-white">
+            Rahul
           </span>
-          <span className="absolute -bottom-1 left-1 h-[2px] w-6 rounded-full bg-gradient-to-r from-lime-300/70 via-emerald-400/80 to-transparent" />
-        </span>
-      </motion.a>
-    </div>
+          <span className="text-[11px] font-semibold tracking-[0.22em] text-white/40 uppercase transition-colors duration-300 group-hover:text-white/70">
+            Podugu
+          </span>
+        </div>
+      </a>
+    </motion.div>
   );
 }

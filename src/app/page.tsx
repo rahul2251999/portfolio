@@ -11,6 +11,9 @@ import { Contact } from "@/components/Contact";
 import { NavBarDemo } from "@/components/NavBarDemo";
 import { Logo } from "@/components/Logo";
 import { LoadingBreadcrumb } from "@/components/ui/animated-loading-svg-text-shimmer";
+import Footer from "@/components/Footer";
+import BackToTop from "@/components/BackToTop";
+import TechMarquee from "@/components/TechMarquee";
 
 export default function Home() {
   const [bootLoading, setBootLoading] = useState(true);
@@ -44,16 +47,19 @@ export default function Home() {
           <About />
         </div>
         
-        <div id="experience">
-          <TimelineDemo />
-        </div>
+        <TimelineDemo />
 
         <Projects />
-        
+
+        <TechMarquee />
+
         <Skills />
         
         <Contact />
       </div>
+
+      <Footer />
+      <BackToTop />
     </main>
   );
 }

@@ -1,14 +1,25 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion, useScroll, useTransform, useVelocity, useSpring } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
 
 export default function Overlay() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setMounted(true), 2100); // fires just after boot loader
+    return () => clearTimeout(t);
+  }, []);
+
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
+  const { scrollYProgress, scrollY } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
+
+  // Scroll velocity → subtle skew on hero panels
+  const scrollVelocity = useVelocity(scrollY);
+  const skewVelocity = useSpring(scrollVelocity, { stiffness: 500, damping: 80 });
+  const skewY = useTransform(skewVelocity, [-3000, 3000], [-2.5, 2.5]);
 
   // Section 1: Center (0-20%) — keep name fully visible on first frame
   const opacity1 = useTransform(scrollYProgress, [0, 0.1, 0.25, 0.3], [1, 1, 1, 0]);
@@ -27,22 +38,32 @@ export default function Overlay() {
       {/* Section 1 */}
       <div className="sticky top-0 h-screen w-full flex items-center justify-center">
         <motion.div
-          style={{ opacity: opacity1, y: y1 }}
+          style={{ opacity: opacity1, y: y1, skewY }}
           className="text-center px-6"
         >
-          <h1 className="text-5xl md:text-8xl font-bold tracking-tighter text-white">
+          <motion.h1
+            className="text-5xl md:text-8xl xl:text-9xl font-bold tracking-tighter text-white"
+            initial={{ opacity: 0, filter: "blur(12px)", y: 20 }}
+            animate={mounted ? { opacity: 1, filter: "blur(0px)", y: 0 } : {}}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          >
             RAHUL PODUGU.
-          </h1>
-          <p className="text-lg md:text-xl text-white/60 mt-4 uppercase tracking-[0.25em]">
+          </motion.h1>
+          <motion.p
+            className="text-lg md:text-xl text-white/60 mt-4 uppercase tracking-[0.25em]"
+            initial={{ opacity: 0, filter: "blur(8px)" }}
+            animate={mounted ? { opacity: 1, filter: "blur(0px)" } : {}}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+          >
             Software Engineer · Backend &amp; Distributed Systems
-          </p>
+          </motion.p>
         </motion.div>
       </div>
 
       {/* Section 2 */}
       <div className="sticky top-0 h-screen w-full flex items-center justify-start px-12 md:px-24">
         <motion.div
-          style={{ opacity: opacity2, x: x2 }}
+          style={{ opacity: opacity2, x: x2, skewY }}
           className="max-w-xl"
         >
           <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight">
@@ -57,7 +78,7 @@ export default function Overlay() {
       {/* Section 3 */}
       <div className="sticky top-0 h-screen w-full flex items-center justify-end px-12 md:px-24">
         <motion.div
-          style={{ opacity: opacity3, x: x3 }}
+          style={{ opacity: opacity3, x: x3, skewY }}
           className="max-w-xl text-right"
         >
           <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight">
