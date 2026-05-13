@@ -112,64 +112,68 @@ export function NavBar({ items, className }: NavBarProps) {
             initial="closed"
             animate="open"
             exit="closed"
-            className="fixed inset-0 z-[90] flex items-center justify-center bg-[#050505] p-6 md:p-12 lg:p-24 overflow-hidden"
+            className="fixed inset-0 z-[90] flex flex-col bg-[#050505] px-6 py-8 md:px-12 lg:px-24 overflow-y-auto"
           >
             {/* Subtle background noise/gradient for the menu */}
-            <div className="absolute inset-0 opacity-40 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white/[0.05] via-[#050505] to-[#050505] pointer-events-none" />
+            <div className="fixed inset-0 opacity-40 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white/[0.05] via-[#050505] to-[#050505] pointer-events-none" />
             
-            <motion.nav
-              variants={containerVariants}
-              initial="closed"
-              animate="open"
-              exit="closed"
-              className="relative flex flex-col items-start md:items-center justify-center gap-4 md:gap-6 w-full max-w-[90rem] mx-auto mt-12 md:mt-0"
-            >
-              {items.map((item, index) => {
-                const Icon = item.icon;
-                return (
-                  <motion.div key={item.name} variants={itemVariants} className="overflow-hidden w-full flex md:justify-center">
-                    <a
-                      href={item.url}
-                      onClick={(e) => handleClick(e, item.url)}
-                      className="group flex items-center gap-6 md:gap-12 w-full md:w-auto"
-                    >
-                      <span className="text-accent-gray/30 text-sm md:text-xl font-bold tracking-widest hidden md:block opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                        0{index + 1}
-                      </span>
-                      <h1 className="text-[3.5rem] md:text-7xl lg:text-[8rem] font-bold tracking-tighter text-accent-white/30 transition-colors duration-500 group-hover:text-accent-white leading-none">
-                        {item.name}
-                      </h1>
-                      <Icon className="w-10 h-10 md:w-16 md:h-16 text-accent-white opacity-0 -translate-x-8 transition-all duration-500 ease-[0.16,1,0.3,1] group-hover:opacity-100 group-hover:translate-x-0 hidden md:block" />
-                    </a>
-                  </motion.div>
-                );
-              })}
-            </motion.nav>
+            <div className="m-auto flex flex-col justify-center w-full relative z-10 py-12">
+              <motion.nav
+                variants={containerVariants}
+                initial="closed"
+                animate="open"
+                exit="closed"
+                className="relative flex flex-col items-start md:items-center justify-center gap-2 md:gap-4 w-full max-w-[90rem] mx-auto"
+              >
+                {items.map((item, index) => {
+                  const Icon = item.icon;
+                  return (
+                    <motion.div key={item.name} variants={itemVariants} className="overflow-hidden w-full flex md:justify-center">
+                      <a
+                        href={item.url}
+                        onClick={(e) => handleClick(e, item.url)}
+                        className="group flex items-center gap-4 md:gap-12 w-full md:w-auto py-1"
+                      >
+                        <span className="text-accent-gray/30 text-sm md:text-xl font-bold tracking-widest hidden md:block opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                          0{index + 1}
+                        </span>
+                        <h1 className="text-[clamp(2.5rem,8vw,7.5rem)] max-h-[12dvh] font-bold tracking-tighter text-accent-white/30 transition-colors duration-500 group-hover:text-accent-white leading-none" style={{ fontSize: 'min(8vw, 10dvh)' }}>
+                          {item.name}
+                        </h1>
+                        <Icon className="w-10 h-10 md:w-14 md:h-14 text-accent-white opacity-0 -translate-x-8 transition-all duration-500 ease-[0.16,1,0.3,1] group-hover:opacity-100 group-hover:translate-x-0 hidden md:block" />
+                      </a>
+                    </motion.div>
+                  );
+                })}
+              </motion.nav>
+            </div>
             
             {/* Footer Elements inside menu */}
-            <motion.div 
-              className="absolute bottom-8 left-8 md:bottom-12 md:left-12 flex flex-col gap-2"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-            >
-              <span className="text-[10px] uppercase tracking-[0.3em] text-accent-gray">Available for work</span>
-              <a href="mailto:rahulpodugu2@gmail.com" className="text-sm font-light text-accent-white hover:text-accent-gray transition-colors">rahulpodugu2@gmail.com</a>
-            </motion.div>
-            
-            <motion.div 
-              className="absolute bottom-8 right-8 md:bottom-12 md:right-12 flex gap-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-            >
-              <a href="https://linkedin.com/in/rahulpodugu" target="_blank" rel="noopener noreferrer" className="text-[10px] uppercase tracking-[0.2em] text-accent-white/50 hover:text-accent-white transition-colors">
-                LinkedIn
-              </a>
-              <a href="https://github.com/Rahul2251999" target="_blank" rel="noopener noreferrer" className="text-[10px] uppercase tracking-[0.2em] text-accent-white/50 hover:text-accent-white transition-colors">
-                GitHub
-              </a>
-            </motion.div>
+            <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mt-auto relative z-10 pt-4">
+              <motion.div 
+                className="flex flex-col gap-2"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8, duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+              >
+                <span className="text-[10px] uppercase tracking-[0.3em] text-accent-gray">Available for work</span>
+                <a href="mailto:rahulpodugu2@gmail.com" className="text-sm font-light text-accent-white hover:text-accent-gray transition-colors">rahulpodugu2@gmail.com</a>
+              </motion.div>
+              
+              <motion.div 
+                className="flex gap-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8, duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+              >
+                <a href="https://linkedin.com/in/rahulpodugu" target="_blank" rel="noopener noreferrer" className="text-[10px] uppercase tracking-[0.2em] text-accent-white/50 hover:text-accent-white transition-colors">
+                  LinkedIn
+                </a>
+                <a href="https://github.com/Rahul2251999" target="_blank" rel="noopener noreferrer" className="text-[10px] uppercase tracking-[0.2em] text-accent-white/50 hover:text-accent-white transition-colors">
+                  GitHub
+                </a>
+              </motion.div>
+            </div>
 
           </motion.div>
         )}
