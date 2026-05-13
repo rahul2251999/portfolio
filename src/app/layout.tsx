@@ -23,6 +23,11 @@ export const metadata: Metadata = {
     title: "Rahul Podugu — Software & AI Engineer",
     description: "Backend & distributed systems engineer. Payment rails, AI analytics, and calm architectures.",
   },
+  icons: {
+    icon: "/rp-logo.png",
+    shortcut: "/rp-logo.png",
+    apple: "/rp-logo.png",
+  },
 };
 
 export default function RootLayout({
