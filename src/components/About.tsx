@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, useCallback } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { AnimatedDownload } from "./ui/animated-download";
 import { cn } from "@/lib/utils";
 
