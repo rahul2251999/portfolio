@@ -13,7 +13,7 @@ export function TimelineDemo() {
           <div className="bg-dark-gray/50 rounded-xl p-6 border border-medium-gray">
             <h4 className="text-accent-white text-lg font-semibold">Software Engineer II · Aztra</h4>
             <p className="text-xs uppercase tracking-[0.2em] text-accent-gray/80 mt-1 mb-3">
-              Aug 2024 – Present · Remote
+              Aug 2024 – April 2026 · Remote
             </p>
             <p className="text-accent-gray text-sm leading-relaxed mb-4">
               Within Aztra&apos;s AI analytics platform I stitch together Spring services, event streams, and observability

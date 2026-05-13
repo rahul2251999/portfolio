@@ -5,60 +5,31 @@ import { motion } from "framer-motion";
 export function Logo() {
   return (
     <motion.div
-      className="fixed top-6 left-6 z-[60]"
-      initial={{ opacity: 0, x: -16 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 2.2 }}
+      className="fixed top-8 left-8 md:top-10 md:left-12 z-[60]"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 2.2 }}
     >
       <a
         href="#hero"
         aria-label="Home"
-        className="group flex items-center gap-2.5"
+        className="group relative flex items-center justify-center overflow-hidden py-2"
         onClick={(e) => {
           e.preventDefault();
           window.scrollTo({ top: 0, behavior: "smooth" });
         }}
       >
-        {/* Geometric mark */}
-        <div className="relative flex h-8 w-8 items-center justify-center">
-          {/* Outer ring — fades in on hover */}
-          <div className="absolute inset-0 rounded-full border border-white/0 transition-all duration-500 group-hover:border-white/20 group-hover:scale-110" />
-          {/* Diamond */}
-          <svg
-            width="22"
-            height="22"
-            viewBox="0 0 22 22"
-            fill="none"
-            className="transition-transform duration-500 group-hover:rotate-90"
-          >
-            <rect
-              x="11"
-              y="1.5"
-              width="13"
-              height="13"
-              rx="1.5"
-              transform="rotate(45 11 11)"
-              stroke="rgba(255,255,255,0.9)"
-              strokeWidth="1.25"
-            />
-            <rect
-              x="11"
-              y="5.5"
-              width="7"
-              height="7"
-              rx="0.5"
-              transform="rotate(45 11 11)"
-              fill="rgba(255,255,255,0.12)"
-            />
-          </svg>
-        </div>
-
-        {/* Wordmark */}
-        <div className="flex flex-col leading-none">
-          <span className="text-[11px] font-semibold tracking-[0.22em] text-white/90 uppercase transition-colors duration-300 group-hover:text-white">
-            Rahul
+        <div className="flex flex-col leading-[1.1]">
+          {/* Main Wordmark */}
+          <span className="relative text-[14px] font-black tracking-[0.25em] text-accent-white uppercase transition-all duration-500 ease-[0.16,1,0.3,1] group-hover:tracking-[0.3em]">
+            <span className="relative z-10">Rahul</span>
+            
+            {/* Subtle Light Sweep Effect */}
+            <span className="absolute inset-0 z-20 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0 transition-all duration-700 ease-[0.16,1,0.3,1] group-hover:translate-x-full group-hover:opacity-100" />
           </span>
-          <span className="text-[11px] font-semibold tracking-[0.22em] text-white/40 uppercase transition-colors duration-300 group-hover:text-white/70">
+
+          {/* Subtext */}
+          <span className="text-[10px] font-bold tracking-[0.45em] text-accent-gray uppercase mt-1 transition-colors duration-500 group-hover:text-accent-white/80">
             Podugu
           </span>
         </div>

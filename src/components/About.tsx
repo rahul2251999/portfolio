@@ -1,42 +1,36 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useRef, useState, useCallback } from "react";
+import { motion, useInView } from "framer-motion";
+import { AnimatedDownload } from "./ui/animated-download";
+import { cn } from "@/lib/utils";
 
-import { AnimatedDownload } from './ui/animated-download';
-import { Button } from './ui/button';
-import HyperTextParagraph from './ui/hyper-text-with-decryption';
-import { useInView } from 'framer-motion';
+const NARRATIVE = `I am drawn to messy systems, not for the chaos, but for the chance to trace the signal inside the noise. Today, I steward platforms that run around the clock, stringing together architectures that keep trust intact even under extreme stress. Building calm for the people who rely on it.`;
 
-function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true });
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (!isInView) return;
-    let current = 0;
-    const step = 16;
-    const increment = to / (1000 / step);
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= to) { setCount(to); clearInterval(timer); }
-      else setCount(Math.floor(current));
-    }, step);
-    return () => clearInterval(timer);
-  }, [isInView, to]);
-
-  return <span ref={ref}>{count}{suffix}</span>;
+function GlowingBentoCard({ children, className, delay = 0 }: { children: React.ReactNode, className?: string, delay?: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
+      className={cn(
+        "group relative overflow-hidden rounded-[2rem] border border-white/[0.05] bg-[#050505] p-8 md:p-12 transition-colors duration-500 hover:border-white/[0.1] hover:bg-[#0a0a0a]",
+        className
+      )}
+    >
+      {/* Subtle radial gradient that tracks hover could go here, for now a static glow */}
+      <div className="absolute -inset-px bg-gradient-to-br from-white/[0.08] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none" />
+      <div className="relative z-10 h-full flex flex-col justify-between">
+        {children}
+      </div>
+    </motion.div>
+  );
 }
 
 export function About() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isDownloading, setIsDownloading] = useState(false);
-
-  const aboutSegments = [
-    'This portfolio is the map of a builder who chases quiet confidence. I am drawn to messy systems, not for the chaos, but for the chance to trace the signal inside the noise and leave teams with something sturdier than before.',
-    'I grew up in India sketching circuits in notebooks and searching for patterns in every puzzle I could find. Graduate study at UMBC pulled that curiosity into distributed systems, cloud primitives, and applied machine intelligence. Each project here is a chapter from that move across continents, disciplines, and perspectives.',
-    "Today, at Aztra, I steward payment and analytics platforms that run around the clock. The work blends patient systems thinking with collaborative rituals, pairing with product partners, mentoring teammates, and stringing together architectures that keep trust intact even under stress.",
-    'Away from delivery sprints, I write, share what I learn, and keep experimenting with open source ideas that stretch my point of view. The story is still being written, and I am always searching for the next frontier where thoughtful engineering can create calm for the people who rely on it.'
-  ];
 
   const handleStartDownload = useCallback(() => {
     if (isDownloading) return;
@@ -45,13 +39,8 @@ export function About() {
 
   const handleAnimationComplete = useCallback(() => {
     setIsDownloading(false);
-
-    // Direct anchor-click — most reliable on GitHub Pages static exports.
-    // fetch→blob fails silently when GitHub Pages sets odd headers; a plain
-    // <a download> always triggers the browser's native save dialog.
     const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
     const resumeUrl = `${basePath}/Resume.pdf`.replace(/\/\/+/g, '/');
-
     const a = document.createElement('a');
     a.href = resumeUrl;
     a.download = 'Rahul_Podugu_Resume.pdf';
@@ -62,130 +51,71 @@ export function About() {
   }, []);
 
   return (
-    <section className="section py-24 bg-pure-black" id="about">
-      <div className="container mx-auto px-4">
-        <div className="mb-12 max-w-4xl pl-6 sm:pl-8 md:pl-12 lg:pl-16">
-          <span className="text-sm uppercase tracking-[0.4em] text-accent-gray">About</span>
-          <h2 className="mt-4 text-4xl font-bold text-accent-white sm:text-5xl">
-            How I build calm in complex systems
-          </h2>
-          <div className="mt-4 max-w-2xl">
-            <HyperTextParagraph
-              text="Systems engineer, strategist, and teammate focused on making backend platforms feel reliable, no matter how much chaos is happening behind the curtain."
-              highlightWords={["systems", "engineer", "backend", "platforms", "reliable"]}
-              className="text-accent-gray text-xs md:text-sm"
-            />
-          </div>
+    <section ref={containerRef} className="relative z-20 bg-[#000000] py-32 md:py-48" id="about">
+      <div className="mx-auto max-w-[90rem] px-6 md:px-12 w-full">
+        
+        {/* Minimal Section Header */}
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-16 md:mb-24 flex items-center gap-4"
+        >
+          <span className="text-[10px] uppercase tracking-[0.4em] text-accent-gray">01. Identity</span>
+          <div className="h-[1px] w-12 bg-white/10" />
+        </motion.div>
 
-          {/* Stats counters */}
-          <div className="mt-10 flex flex-wrap gap-8 pl-0">
-            {[
-              { value: 4, suffix: "+", label: "Years experience" },
-              { value: 10, suffix: "+", label: "Projects shipped" },
-              { value: 3, suffix: "", label: "Companies" },
-            ].map(({ value, suffix, label }) => (
-              <div key={label} className="flex flex-col gap-1">
-                <span className="text-3xl font-bold tracking-tight text-accent-white sm:text-4xl">
-                  <Counter to={value} suffix={suffix} />
-                </span>
-                <span className="text-xs uppercase tracking-[0.25em] text-accent-gray">{label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="mx-auto max-w-4xl px-0 md:px-4 lg:px-6">
-          <div className="space-y-6">
-            {aboutSegments.map((segment, index) => {
-              // First segment gets the hyper-text treatment with key technical terms
-              if (index === 0) {
-                return (
-                  <div key={index} className="pt-2 pb-2">
-                    <HyperTextParagraph
-                      text={segment}
-                      highlightWords={["builder", "systems", "signal", "noise", "teams"]}
-                      className="text-sm md:text-base leading-relaxed text-accent-gray font-normal"
-                    />
-                  </div>
-                );
-              }
-              // Second segment highlights location and technical terms
-              if (index === 1) {
-                return (
-                  <div key={index} className="pt-2 pb-2">
-                    <HyperTextParagraph
-                      text={segment}
-                      highlightWords={["India", "UMBC", "distributed", "systems", "cloud", "machine", "intelligence"]}
-                      className="text-sm md:text-base leading-relaxed text-accent-gray font-normal"
-                    />
-                  </div>
-                );
-              }
-              // Third segment highlights company and work terms
-              if (index === 2) {
-                return (
-                  <div key={index} className="pt-2 pb-2">
-                    <HyperTextParagraph
-                      text={segment}
-                      highlightWords={["Aztra", "payment", "analytics", "platforms", "systems", "thinking", "architectures"]}
-                      className="text-sm md:text-base leading-relaxed text-accent-gray font-normal"
-                    />
-                  </div>
-                );
-              }
-              // Fourth segment highlights activities
-              if (index === 3) {
-                return (
-                  <div key={index} className="pt-2 pb-2">
-                    <HyperTextParagraph
-                      text={segment}
-                      highlightWords={["write", "open", "source", "engineering", "frontier"]}
-                      className="text-sm md:text-base leading-relaxed text-accent-gray font-normal"
-                    />
-                  </div>
-                );
-              }
-              // Fallback to regular text
-              return (
-                <p key={index} className="text-sm md:text-base leading-relaxed text-accent-gray font-normal pt-2 pb-2">
-                  {segment}
-                </p>
-              );
-            })}
-          </div>
-
-          <div className="mt-8 w-full max-w-xl space-y-5 rounded-2xl border border-border/60 bg-background/40 p-5 sm:p-6">
-            <div className="space-y-3">
-              <h3 className="text-sm font-semibold uppercase tracking-[0.35em] text-accent-gray">Resume</h3>
-              <p className="text-sm text-accent-gray">
-                Want the full backstory? Trigger the download animation and grab the latest resume to dive deeper.
+        {/* Bento Grid Architecture */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 auto-rows-min">
+          
+          {/* Main Narrative Card */}
+          <GlowingBentoCard className="md:col-span-8 md:row-span-2" delay={0.1}>
+            <div>
+              <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-accent-gray/60 mb-8">
+                The Philosophy
+              </h3>
+              <p className="text-2xl md:text-4xl lg:text-[2.75rem] font-bold text-accent-white/90 leading-[1.3] md:leading-[1.2] tracking-tight">
+                {NARRATIVE}
               </p>
             </div>
-            <Button
-              onClick={handleStartDownload}
-              disabled={isDownloading}
-              className="relative inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-border/60 bg-background/70 px-5 py-3 text-sm font-medium text-accent-white transition-all duration-300 hover:-translate-y-1 hover:bg-background hover:border-accent-white/40 focus:outline-none focus:ring-2 focus:ring-accent-white/50 focus:ring-offset-2 focus:ring-offset-pure-black"
-              variant="outline"
-            >
-              {isDownloading ? (
-                <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
-                </svg>
-              ) : (
-                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-              )}
-              {isDownloading ? 'Preparing download…' : 'Download Resume'}
-            </Button>
-            <AnimatedDownload
-              className="w-full"
-              width="100%"
-              isAnimating={isDownloading}
-              onAnimationComplete={handleAnimationComplete}
-            />
-          </div>
+          </GlowingBentoCard>
+
+          {/* Metric 1 */}
+          <GlowingBentoCard className="md:col-span-4" delay={0.2}>
+            <div className="flex flex-col h-full justify-center">
+              <span className="text-6xl md:text-7xl font-bold tracking-tighter text-white mb-2">02<span className="text-accent-gray/40">+</span></span>
+              <span className="text-xs uppercase tracking-[0.2em] text-accent-gray/60 font-bold">Years Engineering</span>
+            </div>
+          </GlowingBentoCard>
+
+          {/* Download Action Card */}
+          <GlowingBentoCard className="md:col-span-4 bg-white/[0.02] border-white/[0.1] hover:bg-white/[0.04]" delay={0.3}>
+            <div className="flex flex-col h-full justify-between gap-8 relative">
+              <span className="text-xs uppercase tracking-[0.2em] text-accent-gray/60 font-bold">
+                Documentation
+              </span>
+              
+              <div className="w-full flex justify-center py-4">
+                <button
+                  onClick={handleStartDownload}
+                  disabled={isDownloading}
+                  className="group relative flex h-24 w-full items-center justify-center rounded-2xl border border-white/20 bg-transparent transition-all duration-500 hover:border-white focus:outline-none overflow-hidden"
+                >
+                  <div className="absolute inset-0 bg-white scale-y-0 transition-transform duration-500 ease-[0.16,1,0.3,1] group-hover:scale-y-100 origin-bottom" />
+                  <span className="relative z-10 text-[11px] tracking-[0.3em] uppercase font-bold text-accent-white transition-colors duration-500 group-hover:text-black">
+                    {isDownloading ? "Preparing..." : "Get Resume"}
+                  </span>
+                </button>
+              </div>
+
+              {/* The existing animated download bar below */}
+              <div className="absolute bottom-0 left-0 right-0 h-1">
+                <AnimatedDownload isAnimating={isDownloading} onAnimationComplete={handleAnimationComplete} width="100%" />
+              </div>
+            </div>
+          </GlowingBentoCard>
+
         </div>
       </div>
     </section>
